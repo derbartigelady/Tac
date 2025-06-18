@@ -1,2 +1,56 @@
-# Tac
-Garmin Watchface
+Hello, here is a watchface originally developed for a Garmin Enduro 3 (Display: 280x280px, MIP).
+
+This is a learning project. It is not up to programmer standards!
+
+Layout positions are based on percentages. Graphics are embedded as .svg (vector graphics). 
+So the display should also work on other garmin devices with different resolutions.
+
+![Tac_preview](https://github.com/user-attachments/assets/27d953a2-85c1-4aee-87ba-af0ec6cae8e4)
+
+Newer Versions may differ from Screenshot.
+
+
+Installation of latest generated Watchface:
+
+Connect the clock to the PC via USB. Navigate to this path: 
+
+...\Enduro 3\Internal Storage\GARMIN\Apps
+
+Save the "Tac.prg" file here.
+
+Disconnect the watch from the PC and wait until the watch automatically detects and applies the watchface.
+
+--------------------------------
+
+Software used:
+
+Visual Studio Code (https://code.visualstudio.com/)
+
+Garmin SDK (https://developer.garmin.com/connect-iq/overview/)
+
+Adobe Illustrator or Inkscape (https://inkscape.org/) for graphics editing
+
+Microsoft Copilot (https://copilot.microsoft.com/chats/)
+
+
+Tutorials:
+
+https://medium.com/@ericbt/design-your-own-garmin-watch-face-21d004d38f99
+
+https://krasimirtsonev.com/blog/article/how-to-create-garmin-fenix-8-watch-face
+
+
+Helpful:
+
+Garmin Forum
+
+Youtube
+
+
+Info:
+
+This "manual" code is not compatible to watchface builders like:
+
+https://garmin.watchfacebuilder.com/
+
+https://facemaker.pt/

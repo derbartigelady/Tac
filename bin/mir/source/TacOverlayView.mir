@@ -1,0 +1,229 @@
+[ @file = "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [WatchUi,1,14,21]; ]
+import Toybox.WatchUi;
+[ @file = "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc"; @line = 2; @symbol_importdef<0> = [Toybox,2,7,13]; @symbol_importdef<1> = [Graphics,2,14,22]; ]
+import Toybox.Graphics;
+[ @file = "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc"; @line = 3; @symbol_importdef<0> = [Toybox,3,7,13]; @symbol_importdef<1> = [Activity,3,14,22]; ]
+import Toybox.Activity;
+[ @file = "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc"; @line = 4; @symbol_importdef<0> = [Toybox,4,7,13]; @symbol_importdef<1> = [Math,4,14,18]; ]
+import Toybox.Math;
+[ @file = "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc"; @line = 6; @symbol_classdef = [TacOverlayView,6,6,20]; @symbol_extends<0> = [WatchUi,6,29,36]; @symbol_extends<1> = [Drawable,6,37,45]; ]
+class TacOverlayView extends WatchUi.Drawable {
+    [ @file = "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc"; @line = 6; ]
+    <init> {
+    }
+    [ @file = "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc"; @line = 6; ]
+    static
+    <init> {
+    }
+    [ @file = "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc"; @line = 8; @position = 15; @symbol_vardef = [mTacBitmap,8,15,25]; @symbol_type<0> = [BitmapType,8,29,39]; ]
+    protected
+    var mTacBitmap as BitmapType or Null;
+    [ @file = "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc"; @line = 10; @symbol_functiondef = [initialize,10,13,23]; ]
+    function initialize() as Void {
+C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_10_26_13_4_start:
+[ "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc" 11 8 ]
+        symbol [ Drawable %tmp.2 11 8 16 ];
+        %tmp.2 = getv ? :Drawable;
+        symbol [ initialize %tmp.3 11 17 27 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc" 12 8 ]
+        symbol [ WatchUi %tmp.4 12 21 28 ];
+        %tmp.4 = getm $.Toybox.WatchUi;
+        symbol [ loadResource %tmp.5 12 29 41 ];
+        %tmp.5 = getv function %tmp.4 :loadResource;
+        symbol [ Rez %tmp.7 12 42 45 ];
+        %tmp.7 = getv ? :Rez;
+        symbol [ Drawables %tmp.8 12 46 55 ];
+        %tmp.8 = getv %tmp.7 :Drawables;
+        symbol [ TacLines %tmp.9 12 56 64 ];
+        %tmp.9 = getv %tmp.8 :TacLines;
+        %tmp.10 = invoke %tmp.4 %tmp.5(%tmp.9);
+        %tmp.11 = as %tmp.10 BitmapType;
+        symbol [ BitmapType %tmp.11 12 69 79 ];
+        symbol [ mTacBitmap ? 12 8 18 ];
+        putv self :mTacBitmap %tmp.11;
+C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_10_26_13_4_stop:
+    }
+    [ @file = "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc"; @line = 15; @symbol_functiondef = [draw,15,13,17]; @symbol_param<0> = [dc,15,18,20]; @symbol_param<0>_type<0> = [Dc,15,24,26]; ]
+    function draw(dc as Dc) {
+C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_15_28_37_4_start:
+[ "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc" 16 8 ]
+C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_16_8_18_8_if_stmt:
+        symbol [ mTacBitmap %tmp.2 16 12 22 ];
+        %tmp.2 = getv ? :mTacBitmap;
+        %tmp.3 = null;
+        %tmp.4 = eq %tmp.2 %tmp.3;
+        bf %tmp.4 @C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_16_8_18_8_if_end;
+C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_16_8_18_8_if_true:
+C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_16_32_18_8_start:
+[ "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc" 17 12 ]
+        ret ?;
+C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_16_32_18_8_stop:
+        goto @C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_16_8_18_8_if_end;
+C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_16_8_18_8_if_end:
+[ "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc" 20 8 ]
+        [ "C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_15_28_37_4_start" "C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_15_28_37_4_stop" ]
+        %cx.1 = local;
+        symbol [ cx %cx.1 20 12 14 ];
+        %tmp.5 = lgetv %dc;
+        symbol [ dc %tmp.5 20 17 19 ];
+        symbol [ getWidth %tmp.6 20 20 28 ];
+        %tmp.6 = getv function %tmp.5 :getWidth;
+        %tmp.7 = invoke %tmp.5 %tmp.6();
+        %tmp.8 = 2;
+        %tmp.9 = div %tmp.7 %tmp.8;
+        lputv %cx.1 %tmp.9;
+        symbol [ cx %cx.1 20 12 14 ];
+[ "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc" 21 8 ]
+        [ "C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_15_28_37_4_start" "C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_15_28_37_4_stop" ]
+        %cy.2 = local;
+        symbol [ cy %cy.2 21 12 14 ];
+        %tmp.10 = lgetv %dc;
+        symbol [ dc %tmp.10 21 17 19 ];
+        symbol [ getHeight %tmp.11 21 20 29 ];
+        %tmp.11 = getv function %tmp.10 :getHeight;
+        %tmp.12 = invoke %tmp.10 %tmp.11();
+        %tmp.13 = 2;
+        %tmp.14 = div %tmp.12 %tmp.13;
+        lputv %cy.2 %tmp.14;
+        symbol [ cy %cy.2 21 12 14 ];
+[ "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc" 23 8 ]
+        [ "C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_15_28_37_4_start" "C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_15_28_37_4_stop" ]
+        %heading.3 = local;
+        symbol [ heading %heading.3 23 12 19 ];
+        symbol [ Activity %tmp.15 23 22 30 ];
+        %tmp.15 = getm $.Toybox.Activity;
+        symbol [ getActivityInfo %tmp.16 23 31 46 ];
+        %tmp.16 = getv function %tmp.15 :getActivityInfo;
+        %tmp.17 = invoke %tmp.15 %tmp.16();
+        symbol [ currentHeading %tmp.18 23 49 63 ];
+        %tmp.18 = getv %tmp.17 :currentHeading;
+        lputv %heading.3 %tmp.18;
+        symbol [ heading %heading.3 23 12 19 ];
+[ "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc" 24 8 ]
+        [ "C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_15_28_37_4_start" "C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_15_28_37_4_stop" ]
+        %headingDeg.4 = local;
+        symbol [ headingDeg %headingDeg.4 24 12 22 ];
+        symbol [ Math %tmp.19 24 25 29 ];
+        %tmp.19 = getm $.Toybox.Math;
+        symbol [ toDegrees %tmp.20 24 30 39 ];
+        %tmp.20 = getv function %tmp.19 :toDegrees;
+        %tmp.21 = lgetv %heading.3;
+        symbol [ heading %tmp.21 24 40 47 ];
+        %tmp.22 = invoke %tmp.19 %tmp.20(%tmp.21);
+        lputv %headingDeg.4 %tmp.22;
+        symbol [ headingDeg %headingDeg.4 24 12 22 ];
+[ "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc" 25 8 ]
+C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_25_8_27_8_if_stmt:
+        %tmp.23 = lgetv %headingDeg.4;
+        symbol [ headingDeg %tmp.23 25 12 22 ];
+        %tmp.24 = 0;
+        %tmp.25 = lt %tmp.23 %tmp.24;
+        bf %tmp.25 @C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_25_8_27_8_if_end;
+C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_25_8_27_8_if_true:
+C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_25_28_27_8_start:
+[ "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc" 26 12 ]
+        %tmp.26 = lgetv %headingDeg.4;
+        symbol [ headingDeg %tmp.26 26 12 22 ];
+        %tmp.27 = 360;
+        %tmp.28 = add %tmp.26 %tmp.27;
+        lputv %headingDeg.4 %tmp.28;
+        symbol [ headingDeg %headingDeg.4 26 12 22 ];
+C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_25_28_27_8_stop:
+        goto @C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_25_8_27_8_if_end;
+C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_25_8_27_8_if_end:
+[ "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc" 29 8 ]
+        [ "C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_15_28_37_4_start" "C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_15_28_37_4_stop" ]
+        %xform.5 = local;
+        symbol [ xform %xform.5 29 12 17 ];
+        symbol [ Graphics %tmp.31 29 24 32 ];
+        %tmp.31 = getm $.Toybox.Graphics;
+        symbol [ AffineTransform %tmp.32 29 33 48 ];
+        %tmp.32 = getv function ? %tmp.31 :AffineTransform;
+        %tmp.29 = newc %tmp.32 ();
+        lputv %xform.5 %tmp.29;
+        symbol [ xform %xform.5 29 12 17 ];
+[ "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc" 30 8 ]
+        %tmp.33 = lgetv %xform.5;
+        symbol [ xform %tmp.33 30 8 13 ];
+        symbol [ translate %tmp.34 30 14 23 ];
+        %tmp.34 = getv function %tmp.33 :translate;
+        %tmp.35 = lgetv %cx.1;
+        symbol [ cx %tmp.35 30 25 27 ];
+        symbol [ toFloat %tmp.36 30 28 35 ];
+        %tmp.36 = getv function %tmp.35 :toFloat;
+        %tmp.37 = invoke %tmp.35 %tmp.36();
+        %tmp.38 = sub 0 %tmp.37;
+        %tmp.39 = lgetv %cy.2;
+        symbol [ cy %tmp.39 30 40 42 ];
+        symbol [ toFloat %tmp.40 30 43 50 ];
+        %tmp.40 = getv function %tmp.39 :toFloat;
+        %tmp.41 = invoke %tmp.39 %tmp.40();
+        %tmp.42 = sub 0 %tmp.41;
+        invoke %tmp.33 %tmp.34(%tmp.38, %tmp.42);
+[ "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc" 31 8 ]
+        %tmp.43 = lgetv %xform.5;
+        symbol [ xform %tmp.43 31 8 13 ];
+        symbol [ rotate %tmp.44 31 14 20 ];
+        %tmp.44 = getv function %tmp.43 :rotate;
+        symbol [ Math %tmp.45 31 21 25 ];
+        %tmp.45 = getm $.Toybox.Math;
+        symbol [ toRadians %tmp.46 31 26 35 ];
+        %tmp.46 = getv function %tmp.45 :toRadians;
+        %tmp.47 = lgetv %headingDeg.4;
+        symbol [ headingDeg %tmp.47 31 36 46 ];
+        symbol [ toFloat %tmp.48 31 47 54 ];
+        %tmp.48 = getv function %tmp.47 :toFloat;
+        %tmp.49 = invoke %tmp.47 %tmp.48();
+        %tmp.50 = invoke %tmp.45 %tmp.46(%tmp.49);
+        invoke %tmp.43 %tmp.44(%tmp.50);
+[ "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc" 32 8 ]
+        %tmp.51 = lgetv %xform.5;
+        symbol [ xform %tmp.51 32 8 13 ];
+        symbol [ translate %tmp.52 32 14 23 ];
+        %tmp.52 = getv function %tmp.51 :translate;
+        %tmp.53 = lgetv %cx.1;
+        symbol [ cx %tmp.53 32 24 26 ];
+        symbol [ toFloat %tmp.54 32 27 34 ];
+        %tmp.54 = getv function %tmp.53 :toFloat;
+        %tmp.55 = invoke %tmp.53 %tmp.54();
+        %tmp.56 = lgetv %cy.2;
+        symbol [ cy %tmp.56 32 38 40 ];
+        symbol [ toFloat %tmp.57 32 41 48 ];
+        %tmp.57 = getv function %tmp.56 :toFloat;
+        %tmp.58 = invoke %tmp.56 %tmp.57();
+        invoke %tmp.51 %tmp.52(%tmp.55, %tmp.58);
+[ "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc" 34 8 ]
+        [ "C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_15_28_37_4_start" "C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_15_28_37_4_stop" ]
+        %options.6 = local;
+        symbol [ options %options.6 34 12 19 ];
+        %tmp.59 = newd 1;
+        %tmp.61 = const :transform;
+        symbol [ transform %tmp.61 34 25 34 const ];
+        %tmp.62 = lgetv %xform.5;
+        symbol [ xform %tmp.62 34 38 43 ];
+        %tmp.63 = dup %tmp.59;
+        %tmp.64 = aputv %tmp.63 %tmp.61 %tmp.62;
+        lputv %options.6 %tmp.64;
+        symbol [ options %options.6 34 12 19 ];
+[ "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc" 36 8 ]
+        %tmp.65 = lgetv %dc;
+        symbol [ dc %tmp.65 36 8 10 ];
+        symbol [ drawBitmap2 %tmp.66 36 11 22 ];
+        %tmp.66 = getv function %tmp.65 :drawBitmap2;
+        %tmp.67 = lgetv %cx.1;
+        symbol [ cx %tmp.67 36 23 25 ];
+        %tmp.68 = lgetv %cy.2;
+        symbol [ cy %tmp.68 36 27 29 ];
+        symbol [ mTacBitmap %tmp.70 36 31 41 ];
+        %tmp.70 = getv ? :mTacBitmap;
+        %tmp.71 = lgetv %options.6;
+        symbol [ options %tmp.71 36 43 50 ];
+        invoke %tmp.65 %tmp.66(%tmp.67, %tmp.68, %tmp.70, %tmp.71);
+C_Users_GameHAL_Desktop_Garmin_Watchface_Tac_Tac_Tac_source_TacOverlayView_mc_15_28_37_4_stop:
+    }
+}
+[ @file = "C:\Users\GameHAL\Desktop\Garmin_Watchface\Tac\Tac\Tac\source\TacOverlayView.mc"; @line = 1; ]
+<init> {
+}
