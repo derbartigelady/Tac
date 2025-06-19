@@ -9,20 +9,20 @@ So the display should also work on other garmin devices with different resolutio
 
 Newer Versions may differ from Screenshot.
 
+--------------------------------
 
-Installation of latest generated Watchface:
+Instructions for easy installation of the watchface:
 
-Connect the clock to the PC via USB. Navigate to this path: 
+- Click on the file “Tac.prg”.
+- Click on the download icon (“Download Raw File”) at the top right next to “Raw”. Save the file on the PC.
+- Then connect the watch to the PC via USB cable, wait briefly until it is recognized as a drive and then open the path in Explorer: ...\Enduro 3\Internal Storage\GARMIN\Apps. Copy the file here.
+- Disconnect the watch from the PC. The watch takes a moment to recognize and process the file and applies the file directly as a watchface.
 
-...\Enduro 3\Internal Storage\GARMIN\Apps
-
-Save the "Tac.prg" file here.
-
-Disconnect the watch from the PC and wait until the watch automatically detects and applies the watchface.
+If you have a different model, the path may be named after a different model. I have not been able to test the file with other models, but please report what happens if you have a different model.
 
 --------------------------------
 
-Deutsche Anleitung zur einfachen Installation der Watchface:
+Anleitung zur einfachen Installation der Watchface:
 
 - Klick auf die Datei "Tac.prg".
 - Klick rechts oben neben "Raw" auf das Download Icon ("Download Raw File"). Die Datei auf dem PC speichern. 
@@ -57,6 +57,7 @@ Garmin Forum
 
 Youtube
 
+--------------------------------
 
 Info:
 
