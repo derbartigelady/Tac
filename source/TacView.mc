@@ -16,69 +16,127 @@ import Toybox.Math;
 
 class TacView extends WatchUi.WatchFace {
 
+    var _showNorthTriangle = true; // Flag zum Steuern der Sichtbarkeit
+    var _isSleeping = false;
+
     function initialize() {
         WatchFace.initialize();
-   }
+    }
 
     function onLayout(dc as Dc) as Void {
         setLayout(Rez.Layouts.WatchFace(dc));
+        
+        (View.findDrawableById("icon_note_on") as Bitmap).setVisible(true);
+        (View.findDrawableById("icon_note_off") as Bitmap).setVisible(true);
+        (View.findDrawableById("secLabel") as Text).setVisible(true);
+        (View.findDrawableById("texsecLabel") as Text).setVisible(true);
+        (View.findDrawableById("bt_on") as Bitmap).setVisible(true);
+        (View.findDrawableById("bt_off") as Bitmap).setVisible(true);
+
+        (View.findDrawableById("stepLabel") as Text).setVisible(true);
+        (View.findDrawableById("batteryLabel") as Text).setVisible(true);
+        (View.findDrawableById("heartRateLabel") as Text).setVisible(true);
+
+        (View.findDrawableById("dayofweekLabel") as Text).setVisible(true);
+        (View.findDrawableById("dayLabel") as Text).setVisible(true);
+        (View.findDrawableById("utchourLabel") as Text).setVisible(true);
+        (View.findDrawableById("utcminLabel") as Text).setVisible(true);
+        (View.findDrawableById("texabLabel") as Text).setVisible(true);
+        (View.findDrawableById("monthLabel") as Text).setVisible(true);
+        (View.findDrawableById("yearLabel") as Text).setVisible(true);
+
+        (View.findDrawableById("utcdayofweekLabel") as Text).setVisible(true);
+        (View.findDrawableById("utcdayLabel") as Text).setVisible(true);
+        (View.findDrawableById("utchourLabel") as Text).setVisible(true);
+        (View.findDrawableById("utcminLabel") as Text).setVisible(true);
+        (View.findDrawableById("texzLabel") as Text).setVisible(true);
+        (View.findDrawableById("utcmonthLabel") as Text).setVisible(true);
+        (View.findDrawableById("utcyearLabel") as Text).setVisible(true);
+
+        (View.findDrawableById("mgrsZoneLabel") as Text).setVisible(true);
+        (View.findDrawableById("mgrsSquareLabel") as Text).setVisible(true);
+        (View.findDrawableById("mgrsEastingLabel") as Text).setVisible(true);
+        (View.findDrawableById("mgrsNorthingLabel") as Text).setVisible(true);
+
+        (View.findDrawableById("altitudeLabel") as Text).setVisible(true);
+        (View.findDrawableById("texamslLabel") as Text).setVisible(true);
+
+        (View.findDrawableById("hdngLabel") as Text).setVisible(true);
+        (View.findDrawableById("texangleLabel") as Text).setVisible(true);
+        (View.findDrawableById("tac_lines") as Bitmap).setVisible(true);
+
+        (View.findDrawableById("aohourLabel") as Text).setVisible(false);
+        (View.findDrawableById("texaoLabel") as Text).setVisible(false);
+        (View.findDrawableById("aominLabel") as Text).setVisible(false);
     }
 
     function onShow() as Void {
-   }
-
-function drawNorthTriangle(dc as Dc) as Void {
-
-    var heading = Activity.getActivityInfo().currentHeading;
-    if (heading == null) {
-        return;
     }
 
-    var cx = dc.getWidth() / 2;
-    var cy = dc.getHeight() / 2;
-
-    var deg = Math.toDegrees(heading);
-    if (deg < 0) {
-        deg += 360;
+    function setNorthTriangleInvisible() as Void {
+        _showNorthTriangle = false;
     }
-    var angleDeg = Math.round(deg).toNumber(); // Jetzt garantiert Number!
 
-    // Gradzahl im Label ausgeben
-    var hdngLabel = View.findDrawableById("hdngLabel") as Text;
-    hdngLabel.setText((360 - angleDeg) % 360 + "");
+    function setNorthTriangleVisible() as Void {
+        _showNorthTriangle = true;
+    }
 
-    // "text angle"
-    var texangleLabel = View.findDrawableById("texangleLabel") as Text;
-    texangleLabel.setText("° N");
+    function drawNorthTriangle(dc as Dc) as Void {
+        if (!_showNorthTriangle) {
+            // Dreieck nicht zeichnen, wenn Flag false ist
+            return;
+        }
 
-    // Bogenmaß-Winkel berechnen
-    var angleC = Math.toRadians(-angleDeg.toFloat());
-    var degL = ((angleDeg - 4 + 360) % 360);
-    var degR = ((angleDeg + 4) % 360);
-    var angleL = Math.toRadians(-degL.toFloat());
-    var angleR = Math.toRadians(-degR.toFloat());
+        var heading = Activity.getActivityInfo().currentHeading;
+        if (heading == null) {
+            return;
+        }
 
-    // Dreieck-Radien als Prozent vom kleineren Displaymaß
-    var minDim = (dc.getWidth() < dc.getHeight() ? dc.getWidth() : dc.getHeight()).toFloat();
-    var rMain = minDim * 0.45; // z.B. 45% vom kleineren Maß
-    var rWing = minDim * 0.42; // z.B. 42% vom kleineren Maß
+        var cx = dc.getWidth() / 2;
+        var cy = dc.getHeight() / 2;
 
-    var ptC = polarToXY(angleC, rMain, cx.toFloat(), cy.toFloat());
-    var ptL = polarToXY(angleL, rWing, cx.toFloat(), cy.toFloat());
-    var ptR = polarToXY(angleR, rWing, cx.toFloat(), cy.toFloat());
+        var deg = Math.toDegrees(heading);
+        if (deg < 0) {
+            deg += 360;
+        }
+        var angleDeg = Math.round(deg).toNumber(); // Jetzt garantiert Number!
 
-    // Zeichnen
-    dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_BLACK);
-    dc.fillPolygon([
-        [ptC[0].toNumber(), ptC[1].toNumber()],
-        [ptR[0].toNumber(), ptR[1].toNumber()],
-        [ptL[0].toNumber(), ptL[1].toNumber()]
-    ]);
-}
+        // Gradzahl im Label ausgeben
+        var hdngLabel = View.findDrawableById("hdngLabel") as Text;
+        hdngLabel.setText((360 - angleDeg) % 360 + "");
 
-function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as [Float, Float] {
-    return [cx + length * Math.sin(angle), cy - length * Math.cos(angle)];
-}
+        // "text angle"
+        var texangleLabel = View.findDrawableById("texangleLabel") as Text;
+        texangleLabel.setText("° N");
+
+        // Bogenmaß-Winkel berechnen
+        var angleC = Math.toRadians(-angleDeg.toFloat());
+        var degL = ((angleDeg - 4 + 360) % 360);
+        var degR = ((angleDeg + 4) % 360);
+        var angleL = Math.toRadians(-degL.toFloat());
+        var angleR = Math.toRadians(-degR.toFloat());
+
+        // Dreieck-Radien als Prozent vom kleineren Displaymaß
+        var minDim = (dc.getWidth() < dc.getHeight() ? dc.getWidth() : dc.getHeight()).toFloat();
+        var rMain = minDim * 0.45; // z.B. 45% vom kleineren Maß
+        var rWing = minDim * 0.42; // z.B. 42% vom kleineren Maß
+
+        var ptC = polarToXY(angleC, rMain, cx.toFloat(), cy.toFloat());
+        var ptL = polarToXY(angleL, rWing, cx.toFloat(), cy.toFloat());
+        var ptR = polarToXY(angleR, rWing, cx.toFloat(), cy.toFloat());
+
+        // Zeichnen
+        dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_BLACK);
+        dc.fillPolygon([
+            [ptC[0].toNumber(), ptC[1].toNumber()],
+            [ptR[0].toNumber(), ptR[1].toNumber()],
+            [ptL[0].toNumber(), ptL[1].toNumber()]
+        ]);
+    }
+
+    function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as [Float, Float] {
+        return [cx + length * Math.sin(angle), cy - length * Math.cos(angle)];
+    }
 
 
 // "Alle anderen Dinge"--------------------------------------------------------------------------------------------------
@@ -88,18 +146,22 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
         // Layout-Elemente aktualisieren
         View.onUpdate(dc);
 
-
         // Bluetooth-Verbindung prüfen
         var phoneConnected = Toybox.System.getDeviceSettings().phoneConnected;
         var btOn = View.findDrawableById("bt_on") as Bitmap;
         var btOff = View.findDrawableById("bt_off") as Bitmap;
 
-        if (phoneConnected) {
-            btOn.setVisible(true);
-            btOff.setVisible(false);
+        if (!_isSleeping) {
+            if (phoneConnected) {
+                btOn.setVisible(true);
+                btOff.setVisible(false);
+            } else {
+                btOn.setVisible(false);
+                btOff.setVisible(true);
+            }
         } else {
             btOn.setVisible(false);
-            btOff.setVisible(true);
+            btOff.setVisible(false);
         }
 
 
@@ -120,12 +182,17 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
         var bellOn = View.findDrawableById("icon_note_on") as Bitmap;
         var bellOff = View.findDrawableById("icon_note_off") as Bitmap;
 
-        if (notifications > 0) {
-            bellOn.setVisible(true);
-            bellOff.setVisible(false);
+        if (!_isSleeping) {
+            if (notifications > 0) {
+                bellOn.setVisible(true);
+                bellOff.setVisible(false);
+            } else {
+                bellOn.setVisible(false);
+                bellOff.setVisible(true);
+            }
         } else {
             bellOn.setVisible(false);
-            bellOff.setVisible(true);
+            bellOff.setVisible(false);
         }
 
 
@@ -195,11 +262,13 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
         var minString = Lang.format(
             "$1$",
             [
-                min.min.format("%02d"),
+            min.min.format("%02d"),
             ]
         );
         var minlabel = View.findDrawableById("minLabel") as Text;
         minlabel.setText(minString);
+
+
 
 
         // "month"
@@ -399,6 +468,17 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
         texamslLabel.setText("MSL");
 
 
+        // allways on display"--------------------------------------------------------------------------------------------------
+
+        var aominlabel = View.findDrawableById("aominLabel") as Text;
+        aominlabel.setText(minString);
+
+        var texaoLabel = View.findDrawableById("texaoLabel") as Text;
+        texaoLabel.setText(":");
+
+        var aohourlabel = View.findDrawableById("aohourLabel") as Text;
+        aohourlabel.setText(hourString);
+
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
         drawNorthTriangle(dc);
@@ -408,14 +488,98 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
     // state of this View here. This includes freeing resources from
     // memory.
     function onHide() as Void {
-    }
+   }
 
     // The user has just looked at their watch. Timers and animations may be started here.
     function onExitSleep() as Void {
+        _showNorthTriangle = true;
+        _isSleeping = false;
+
+        (View.findDrawableById("secLabel") as Text).setVisible(true);
+        (View.findDrawableById("texsecLabel") as Text).setVisible(true);
+
+        (View.findDrawableById("stepLabel") as Text).setVisible(true);
+        (View.findDrawableById("batteryLabel") as Text).setVisible(true);
+        (View.findDrawableById("heartRateLabel") as Text).setVisible(true);
+
+        (View.findDrawableById("dayofweekLabel") as Text).setVisible(true);
+        (View.findDrawableById("dayLabel") as Text).setVisible(true);
+        (View.findDrawableById("hourLabel") as Text).setVisible(true);
+        (View.findDrawableById("minLabel") as Text).setVisible(true);
+        (View.findDrawableById("texabLabel") as Text).setVisible(true);
+        (View.findDrawableById("monthLabel") as Text).setVisible(true);
+        (View.findDrawableById("yearLabel") as Text).setVisible(true);
+
+        (View.findDrawableById("utcdayofweekLabel") as Text).setVisible(true);
+        (View.findDrawableById("utcdayLabel") as Text).setVisible(true);
+        (View.findDrawableById("utchourLabel") as Text).setVisible(true);
+        (View.findDrawableById("utcminLabel") as Text).setVisible(true);
+        (View.findDrawableById("texzLabel") as Text).setVisible(true);
+        (View.findDrawableById("utcmonthLabel") as Text).setVisible(true);
+        (View.findDrawableById("utcyearLabel") as Text).setVisible(true);
+
+        (View.findDrawableById("mgrsZoneLabel") as Text).setVisible(true);
+        (View.findDrawableById("mgrsSquareLabel") as Text).setVisible(true);
+        (View.findDrawableById("mgrsEastingLabel") as Text).setVisible(true);
+        (View.findDrawableById("mgrsNorthingLabel") as Text).setVisible(true);
+
+        (View.findDrawableById("altitudeLabel") as Text).setVisible(true);
+        (View.findDrawableById("texamslLabel") as Text).setVisible(true);
+
+        (View.findDrawableById("hdngLabel") as Text).setVisible(true);
+        (View.findDrawableById("texangleLabel") as Text).setVisible(true);
+        (View.findDrawableById("tac_lines") as Bitmap).setVisible(true);
+
+        (View.findDrawableById("aohourLabel") as Text).setVisible(false);
+        (View.findDrawableById("texaoLabel") as Text).setVisible(false);
+        (View.findDrawableById("aominLabel") as Text).setVisible(false);
     }
 
     // Terminate any active timers and prepare for slow updates.
     function onEnterSleep() as Void {
+        _showNorthTriangle = false;
+        _isSleeping = true;
+
+        (View.findDrawableById("secLabel") as Text).setVisible(false);
+        (View.findDrawableById("texsecLabel") as Text).setVisible(false);
+
+        (View.findDrawableById("stepLabel") as Text).setVisible(false);
+        (View.findDrawableById("batteryLabel") as Text).setVisible(false);
+        (View.findDrawableById("heartRateLabel") as Text).setVisible(false);
+
+        (View.findDrawableById("dayofweekLabel") as Text).setVisible(false);
+        (View.findDrawableById("dayLabel") as Text).setVisible(false);
+        (View.findDrawableById("hourLabel") as Text).setVisible(false);
+        (View.findDrawableById("minLabel") as Text).setVisible(false);
+        (View.findDrawableById("texabLabel") as Text).setVisible(false);
+        (View.findDrawableById("monthLabel") as Text).setVisible(false);
+        (View.findDrawableById("yearLabel") as Text).setVisible(false);
+
+        (View.findDrawableById("utcdayofweekLabel") as Text).setVisible(false);
+        (View.findDrawableById("utcdayLabel") as Text).setVisible(false);
+        (View.findDrawableById("utchourLabel") as Text).setVisible(false);
+        (View.findDrawableById("utcminLabel") as Text).setVisible(false);
+        (View.findDrawableById("texzLabel") as Text).setVisible(false);
+        (View.findDrawableById("utcmonthLabel") as Text).setVisible(false);
+        (View.findDrawableById("utcyearLabel") as Text).setVisible(false);
+
+        (View.findDrawableById("mgrsZoneLabel") as Text).setVisible(false);
+        (View.findDrawableById("mgrsSquareLabel") as Text).setVisible(false);
+        (View.findDrawableById("mgrsEastingLabel") as Text).setVisible(false);
+        (View.findDrawableById("mgrsNorthingLabel") as Text).setVisible(false);
+
+        (View.findDrawableById("altitudeLabel") as Text).setVisible(false);
+        (View.findDrawableById("texamslLabel") as Text).setVisible(false);
+
+        (View.findDrawableById("hdngLabel") as Text).setVisible(false);
+        (View.findDrawableById("texangleLabel") as Text).setVisible(false);
+        (View.findDrawableById("tac_lines") as Bitmap).setVisible(false);
+
+        (View.findDrawableById("aohourLabel") as Text).setVisible(true);
+        (View.findDrawableById("texaoLabel") as Text).setVisible(true);        
+        (View.findDrawableById("aominLabel") as Text).setVisible(true);
+        
+
     }
 
 }
