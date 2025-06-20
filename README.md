@@ -13,7 +13,7 @@ Newer Versions may differ from Screenshot.
 
 Instructions for easy installation of the watchface:
 
-- Click on the file “Tac.prg”.
+- Click on the Folder "Releases", select your watchmodel, click on the file “Tac.prg”.
 - Click on the download icon (“Download Raw File”) at the top right next to “Raw”. Save the file on the PC.
 - Then connect the watch to the PC via USB cable, wait briefly until it is recognized as a drive and then open the path in Explorer: ...\Enduro 3\Internal Storage\GARMIN\Apps. Copy the file here.
 - Disconnect the watch from the PC. The watch takes a moment to recognize and process the file and applies the file directly as a watchface.
@@ -24,7 +24,7 @@ If you have a different model, the path may be named after a different model. I 
 
 Anleitung zur einfachen Installation der Watchface:
 
-- Klick auf die Datei "Tac.prg".
+- Klickt oben auf den Ordner "Releases", wählt euer Uhrmodell, klick auf die Datei "Tac.prg".
 - Klick rechts oben neben "Raw" auf das Download Icon ("Download Raw File"). Die Datei auf dem PC speichern. 
 - Dann Uhr mit dem PC via USB Kabel verbinden, kurz warten bis sie als Laufwerk erkannt wird und dann den Pfad im Explorer öffnen: ...\Enduro 3\Internal Storage\GARMIN\Apps. Datei hierhin kopieren. 
 - Uhr vom PC trennen. Die Uhr braucht einen Augenblick bis die Datei erkannt und verarbeitet wurde und wendet die Datei direkt als Watchface an.
