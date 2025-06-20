@@ -16,35 +16,18 @@ import Toybox.Math;
 
 class TacView extends WatchUi.WatchFace {
 
-    var isSleeping = false;
-    var first = true;
-    var switchLayout = false;
-
     function initialize() {
         WatchFace.initialize();
-    }
+   }
 
     function onLayout(dc as Dc) as Void {
-        if (first) {
-            setLayout(Rez.Layouts.WatchFace(dc));
-        } else {
-            setLayout(Rez.Layouts.WatchFaceALT(dc));
-        }
-        first = !first;
-        switchLayout = false;
+        setLayout(Rez.Layouts.WatchFace(dc));
     }
 
     function onShow() as Void {
-    }
-
-
-// "Kompassnadel"--------------------------------------------------------------------------------------------------
-
+   }
 
 function drawNorthTriangle(dc as Dc) as Void {
-    if (isSleeping) {
-        return;
-    }
 
     var heading = Activity.getActivityInfo().currentHeading;
     if (heading == null) {
@@ -75,9 +58,10 @@ function drawNorthTriangle(dc as Dc) as Void {
     var angleL = Math.toRadians(-degL.toFloat());
     var angleR = Math.toRadians(-degR.toFloat());
 
-    // Dreieck-Radien
-    var rMain = 134.0;
-    var rWing = 125.0;
+    // Dreieck-Radien als Prozent vom kleineren Displaymaß
+    var minDim = (dc.getWidth() < dc.getHeight() ? dc.getWidth() : dc.getHeight()).toFloat();
+    var rMain = minDim * 0.45; // z.B. 45% vom kleineren Maß
+    var rWing = minDim * 0.42; // z.B. 42% vom kleineren Maß
 
     var ptC = polarToXY(angleC, rMain, cx.toFloat(), cy.toFloat());
     var ptL = polarToXY(angleL, rWing, cx.toFloat(), cy.toFloat());
@@ -102,14 +86,10 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
 
     function onUpdate(dc as Dc) as Void {
         // Layout-Elemente aktualisieren
-        if (switchLayout) {
-            onLayout(dc);
-        }
         View.onUpdate(dc);
 
 
         // Bluetooth-Verbindung prüfen
-    if (!isSleeping) {
         var phoneConnected = Toybox.System.getDeviceSettings().phoneConnected;
         var btOn = View.findDrawableById("bt_on") as Bitmap;
         var btOff = View.findDrawableById("bt_off") as Bitmap;
@@ -121,11 +101,9 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
             btOn.setVisible(false);
             btOff.setVisible(true);
         }
-    }
 
 
         // "sec"
-    if (!isSleeping) {
         var sec = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
         var secString = Lang.format(
             "$1$",
@@ -135,7 +113,6 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
         );
         var seclabel = View.findDrawableById("secLabel") as Text;
         seclabel.setText(secString);
-    }
 
 
         // "Notifications"
@@ -153,15 +130,12 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
 
 
         // "Battery"
-    if (!isSleeping) {
         var battery = Toybox.System.getSystemStats().battery;
         var batteryLabel = View.findDrawableById("batteryLabel") as Text;
         batteryLabel.setText(battery.format("%d"));
-    }
        
 
         // "Puls"
-    if (!isSleeping) {
         var heartRate = 0;
         var heartRateText = "-";
         var actInfo = Activity.getActivityInfo();
@@ -173,22 +147,18 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
         }
         var heartRateLabel = View.findDrawableById("heartRateLabel") as Text;
         heartRateLabel.setText(heartRateText);
-    }
 
 
         // "steps"
-    if (!isSleeping) {
         var stepCount = Toybox.ActivityMonitor.getInfo().steps;
         var stepLabel = View.findDrawableById("stepLabel") as Text;
         stepLabel.setText(stepCount == null ? "-" : stepCount.format("%d"));
-    }
 
 
         // "Local"--------------------------------------------------------------------------------------------------
 
 
         // "Weekdays"
-    if (!isSleeping) {
         var currentTime = Time.now();
         var dayofweekInfo = Gregorian.info(currentTime, Time.FORMAT_SHORT);
         var weekDays = ["Sa", "So", "Mo", "Di", "Mi", "Do", "Fr"];
@@ -206,11 +176,9 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
         // Setze den Wert ins UI-Element
         var dayofweeklabel = View.findDrawableById("dayofweekLabel") as Text;
         dayofweeklabel.setText(dayofweekString);
-    }
 
         
         // "day"
-    if (!isSleeping) {
         var day = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
         var dayString = Lang.format(
             "$1$",
@@ -220,7 +188,6 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
         );
         var daylabel = View.findDrawableById("dayLabel") as Text;
         daylabel.setText(dayString);
-    }
 
 
         // "min"
@@ -236,7 +203,6 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
 
 
         // "month"
-    if (!isSleeping) {
         var month = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
         var monthString = Lang.format(
             "$1$",
@@ -246,11 +212,9 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
         );
         var monthlabel = View.findDrawableById("monthLabel") as Text;
         monthlabel.setText(monthString);
-    }
 
 
         // "year"
-    if (!isSleeping) {
         var year = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
         var yearString = Lang.format(
             "$1$",
@@ -260,14 +224,12 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
         );
         var yearlabel = View.findDrawableById("yearLabel") as Text;
         yearlabel.setText(yearString);
-    }
 
 
         // "UTC"--------------------------------------------------------------------------------------------------
 
 
         // "WeekdaysUTC"
-    if (!isSleeping) {
         var utccurrentTime = Time.now();
         var utcdayofweekInfo = Gregorian.info(utccurrentTime, Time.FORMAT_SHORT);
         var utcweekDays = ["sa", "su", "mo", "tu", "we", "th", "fr"];
@@ -285,11 +247,9 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
         // Setze den Wert ins UI-Element
         var utcdayofweeklabel = View.findDrawableById("utcdayofweekLabel") as Text;
         utcdayofweeklabel.setText(utcdayofweekString);
-    }
 
         
         // "dayUTC"
-    if (!isSleeping) {
         var dayutc = Time.now();
         var utcday = Gregorian.utcInfo(dayutc, Time.FORMAT_SHORT);
         var utcdayString = Lang.format(
@@ -300,7 +260,6 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
         );
         var utcdaylabel = View.findDrawableById("utcdayLabel") as Text;
         utcdaylabel.setText(utcdayString);
-    }
 
 
         // "minUTC"
@@ -317,14 +276,11 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
 
 
         // "text Z"
-    if (!isSleeping) {
         var texzLabel = View.findDrawableById("texzLabel") as Text;
         texzLabel.setText("Z");
-    }
 
 
         // "monthUTC"
-    if (!isSleeping) {
         var monthutc = Time.now();
         var utcmonth = Gregorian.utcInfo(monthutc, Time.FORMAT_MEDIUM);
         var utcmonthString = Lang.format(
@@ -335,11 +291,9 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
         );
         var utcmonthlabel = View.findDrawableById("utcmonthLabel") as Text;
         utcmonthlabel.setText(utcmonthString);
-    }
 
 
         // "yearUTC"
-    if (!isSleeping) {
         var yearutc = Time.now();
         var utcyear = Gregorian.utcInfo(yearutc, Time.FORMAT_SHORT);
         var utcyearString = Lang.format(
@@ -350,7 +304,6 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
         );
         var utcyearlabel = View.findDrawableById("utcyearLabel") as Text;
         utcyearlabel.setText(utcyearString);
-    }
 
 
         // "LOCAL / UTC A B Berechnung"--------------------------------------------------------------------------------------------------
@@ -396,16 +349,11 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
 
         var texabLabel = View.findDrawableById("texabLabel") as Text;
         texabLabel.setText(texab);
-
-
-        // "text timediv"
-        var texdivLabel = View.findDrawableById("texdivLabel") as Text;
-        texdivLabel.setText(":");
     
 
         // "STUFF"--------------------------------------------------------------------------------------------------
 
-    if (!isSleeping) {
+
         var myLocation = Position.getInfo().position;
         var mgrsString = myLocation.toGeoString(Position.GEO_MGRS);
 
@@ -440,9 +388,7 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
 
         var mgrsNorthingLabel = View.findDrawableById("mgrsNorthingLabel") as Text;
         mgrsNorthingLabel.setText(mgrsNorthing);
-    }
 
-    if (!isSleeping) {
         // "Altitude"
         var altitude = Activity.getActivityInfo().altitude;
         var altitudeLabel = View.findDrawableById("altitudeLabel") as Text;
@@ -451,7 +397,6 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
         // "text AMSL"
         var texamslLabel = View.findDrawableById("texamslLabel") as Text;
         texamslLabel.setText("MSL");
-    }
 
 
         // Call the parent onUpdate function to redraw the layout
@@ -467,51 +412,10 @@ function polarToXY(angle as Float, length as Float, cx as Float, cy as Float) as
 
     // The user has just looked at their watch. Timers and animations may be started here.
     function onExitSleep() as Void {
-        isSleeping = false;
-        switchLayout = true;
     }
 
     // Terminate any active timers and prepare for slow updates.
     function onEnterSleep() as Void {
-        isSleeping = true;
-        switchLayout = true;
-
-    // Alle visuellen Elemente explizit ausblenden
-        (View.findDrawableById("icon_note_on") as Bitmap).setVisible(false);
-        (View.findDrawableById("icon_note_off") as Bitmap).setVisible(false);
-        (View.findDrawableById("secLabel") as Text).setVisible(false);
-        (View.findDrawableById("texsecLabel") as Text).setVisible(false);
-        (View.findDrawableById("bt_on") as Bitmap).setVisible(false);
-        (View.findDrawableById("bt_off") as Bitmap).setVisible(false);
-
-        (View.findDrawableById("stepLabel") as Text).setVisible(false);
-        (View.findDrawableById("batteryLabel") as Text).setVisible(false);
-        (View.findDrawableById("heartRateLabel") as Text).setVisible(false);
-
-        (View.findDrawableById("dayofweekLabel") as Text).setVisible(false);
-        (View.findDrawableById("dayLabel") as Text).setVisible(false);
-        (View.findDrawableById("texabLabel") as Text).setVisible(false);
-        (View.findDrawableById("monthLabel") as Text).setVisible(false);
-        (View.findDrawableById("yearLabel") as Text).setVisible(false);
-
-        (View.findDrawableById("utcdayofweekLabel") as Text).setVisible(false);
-        (View.findDrawableById("utcdayLabel") as Text).setVisible(false);
-        (View.findDrawableById("utchourLabel") as Text).setVisible(false);
-        (View.findDrawableById("utcminLabel") as Text).setVisible(false);
-        (View.findDrawableById("texzLabel") as Text).setVisible(false);
-        (View.findDrawableById("utcmonthLabel") as Text).setVisible(false);
-        (View.findDrawableById("utcyearLabel") as Text).setVisible(false);
-
-        (View.findDrawableById("mgrsZoneLabel") as Text).setVisible(false);
-        (View.findDrawableById("mgrsSquareLabel") as Text).setVisible(false);
-        (View.findDrawableById("mgrsEastingLabel") as Text).setVisible(false);
-        (View.findDrawableById("mgrsNorthingLabel") as Text).setVisible(false);
-
-        (View.findDrawableById("altitudeLabel") as Text).setVisible(false);
-        (View.findDrawableById("texamslLabel") as Text).setVisible(false);
-
-        (View.findDrawableById("hdngLabel") as Text).setVisible(false);
-        (View.findDrawableById("texangleLabel") as Text).setVisible(false);
     }
 
 }
