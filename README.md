@@ -3,7 +3,8 @@ Hello, here is a watchface originally developed for a Garmin Enduro 3 (Display: 
 Right now, this Devices are supported: 
 - Garmin Enduro 3
 - Garmin Forerunner 265
-  more Devices can be added - just ask
+
+more Devices can be added - just ask
 
 This is a learning project. It is not up to programmer standards!
 
