@@ -1,5 +1,10 @@
 Hello, here is a watchface originally developed for a Garmin Enduro 3 (Display: 280x280px, MIP).
 
+Right now, this Devices are supported: 
+- Garmin Enduro 3
+- Garmin Forerunner 265
+  more Devices can be added - just ask
+
 This is a learning project. It is not up to programmer standards!
 
 Layout positions are based on percentages. Graphics are embedded as .svg (vector graphics). 
