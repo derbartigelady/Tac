@@ -30,7 +30,7 @@ Right now, this devices are supported:
 - Tactix 8 Solar 51mm (..\Releases\fenix851mm)
 - Forerunner 265 (..\Releases\fr265)
 
-Some Devices share the same Folder - dont worry
+Some Devices share the same Folder - dont worry.
 
 More Devices can be added - just ask.
 
