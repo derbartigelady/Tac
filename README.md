@@ -1,8 +1,22 @@
 Hello, here is a watchface originally developed for a Garmin Enduro 3 (Display: 280x280px, MIP).
 
 Right now, this Devices are supported: 
-- Garmin Enduro 3
-- Garmin Forerunner 265
+
+- Enduro 3 (..\Releases\enduro3)
+- tactix 7 – AMOLED Edition / Epix Pro (Gen 2) 51mm / D2 Mach 1 Pro (..\Releases\epix2pro51mm)
+- Fenix 7 / Quatix 7 (..\Releases\fenix7)
+- Fenix 7 Pro (..\Releases\fenix7pro)
+- Fenix 7 Pro - Solar Edition (no Wi-Fi) (..\Releases\fenix7pronowifi)
+- Fenix 7S (..\Releases\fenix7s)
+- Fenix 7S Pro (..\Releases\fenix7pro)
+- Fenix 7X / Tactix 7 / Quatix 7X Solar / Enduro 2 (..\Releases\fenix7x)
+- Fenix 7X Pro (..\Releases\fenix7xpro)
+- Fenix 7X Pro - Solar Edition (no Wi-Fi) (..\Releases\fenix7xpronowifi)
+- Fenix 8 43mm (..\Releases\fenix843mm)
+- Fenix 8 47mm / 51mm / Tactix 8 47mm / 51mm (..\Releases\fenix847mm)
+- Fenix 8 Solar 47mm (..\Releases\fenix8solar47mm)
+- Fenix 8 Solar 51mm / Tactix 8 Solar 51mm (..\Releases\fenix851mm)
+- Forerunner 265 (..\Releases\fr265)
 
 more Devices can be added - just ask
 
@@ -72,3 +86,7 @@ This "manual" code is not compatible to watchface builders like:
 https://garmin.watchfacebuilder.com/
 
 https://facemaker.pt/
+
+--------------------------------
+
+If you dont want to use Garmin apps on your phone for private reasons, you can use https://gadgetbridge.org/. It only connects to the watch and not to the www or Garmin servers.
