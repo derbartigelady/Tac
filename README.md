@@ -10,6 +10,7 @@ Right now, this devices are supported:
 - Enduro 2 (..\Releases\fenix7x)
 - Enduro 3 (..\Releases\enduro3)
 - Epix Pro (Gen 2) 51mm (..\Releases\epix2pro51mm)
+- Forerunner 265 (..\Releases\fr265)
 - tactix 7 – AMOLED Edition (..\Releases\epix2pro51mm)
 - Fenix 7 / Quatix 7 (..\Releases\fenix7)
 - Fenix 7 Pro (..\Releases\fenix7pro)
@@ -28,7 +29,6 @@ Right now, this devices are supported:
 - Tactix 7 – AMOLED Edition (..\Releases\epix2pro51mm)
 - Tactix 8 47mm / 51mm (..\Releases\fenix847mm)
 - Tactix 8 Solar 51mm (..\Releases\fenix851mm)
-- Forerunner 265 (..\Releases\fr265)
 
 Some Devices share the same Folder - dont worry.
 
