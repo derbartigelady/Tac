@@ -11,7 +11,6 @@ Right now, this devices are supported:
 - Enduro 3 (..\Releases\enduro3)
 - Epix Pro (Gen 2) 51mm (..\Releases\epix2pro51mm)
 - Forerunner 265 (..\Releases\fr265)
-- tactix 7 – AMOLED Edition (..\Releases\epix2pro51mm)
 - Fenix 7 / Quatix 7 (..\Releases\fenix7)
 - Fenix 7 Pro (..\Releases\fenix7pro)
 - Fenix 7 Pro - Solar Edition (no Wi-Fi) (..\Releases\fenix7pronowifi)
