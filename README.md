@@ -1,4 +1,8 @@
-Hello, here is a watchface originally developed for a Garmin Enduro 3 (Display: 280x280px, MIP).
+Hello, here is a watchface for Outdoor/Mil use.
+
+![Tac_preview](https://github.com/user-attachments/assets/27d953a2-85c1-4aee-87ba-af0ec6cae8e4)
+
+Newer Versions may differ from Screenshot.
 
 Right now, this Devices are supported: 
 
@@ -21,13 +25,10 @@ Right now, this Devices are supported:
 more Devices can be added - just ask
 
 This is a learning project. It is not up to programmer standards!
+Tere are no options/settings in this watchface.
 
 Layout positions are based on percentages. Graphics are embedded as .svg (vector graphics). 
 The main problems when adding new models are different font interpretations per model.
-
-![Tac_preview](https://github.com/user-attachments/assets/27d953a2-85c1-4aee-87ba-af0ec6cae8e4)
-
-Newer Versions may differ from Screenshot.
 
 --------------------------------
 
