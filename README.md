@@ -93,6 +93,6 @@ Privacy
 
 - this watchface does not connect to the internet or garmin- / google- / apple-servers
 - this watchface is able to run offline (messages and bluetooth notification wont be avalible)
-- the only external data use are positioning services like GPS, GLONASS, Galileo,... signals included in the Watch OS
+- the only external data in use are positioning services like GPS, GLONASS, Galileo,... included in the Watch OS
 - best deal for privacy/battery/features: Enduro 3, its a Fenix 8 without microphone or speaker (only vibration) 
 - If you dont want to use Garmin apps on your android phone for private reasons, you can use https://gadgetbridge.org/. It can be used without internet connection an still provide connection to the watch and show your daily parameters.
