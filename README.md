@@ -4,7 +4,7 @@ Hello, here is a Garmin watchface for Outdoor/Mil use.
 
 Newer Versions may differ from screenshot.
 
-Right now, this devices are supported: 
+Right now, this devices are supported (some devices share the same folder - dont worry): 
 
 - D2 Mach 1 Pro (..\Releases\epix2pro51mm)
 - Enduro 2 (..\Releases\fenix7x)
@@ -28,8 +28,6 @@ Right now, this devices are supported:
 - Tactix 7 – AMOLED Edition (..\Releases\epix2pro51mm)
 - Tactix 8 47mm / 51mm (..\Releases\fenix847mm)
 - Tactix 8 Solar 51mm (..\Releases\fenix851mm)
-
-Some devices share the same folder - dont worry.
 
 More Devices can be added - just ask here:
 - https://www.reddit.com/r/bundeswehr/comments/1lek5bx/garmin_watchface/
