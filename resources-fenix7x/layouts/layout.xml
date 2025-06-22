@@ -1,0 +1,48 @@
+<layouts>    
+    <layout id="WatchFace">
+        <bitmap id="icon_note_on" x="27%" y="15%" filename="/../../resources/drawables/m_on.svg" dithering="none" scaleX="9%" scaleY="8.5%"/>
+        <bitmap id="icon_note_off" x="27%" y="15%" filename="/../../resources/drawables/m_off.svg" dithering="none" scaleX="9%" scaleY="8.5%"/>
+        <label id="secLabel" x="center" y="6%" font="Graphics.FONT_NUMBER_MILD" justification="Graphics.TEXT_JUSTIFY_CENTER" color="FFFF00" />
+        <label id="texsecLabel" x="59%" y="15.7%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="999999" />
+        <bitmap id="bt_on" x="66%" y="15.7%" filename="/../../resources/drawables/bluetooth_on.svg" dithering="none" scaleX="6%" scaleY="6%"/>
+        <bitmap id="bt_off" x="66%" y="15.7%" filename="/../../resources/drawables/bluetooth_off.svg" dithering="none" scaleX="6%" scaleY="6%"/>
+
+        <label id="stepLabel" x="33%" y="24.5%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="FFFF00" />
+        <label id="batteryLabel" x="54%" y="24.5%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="FFFF00" />
+        <label id="heartRateLabel" x="76%" y="24.5%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="FFFF00" />
+
+        <label id="dayofweekLabel" x="8.8%" y="34%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="FFFF00" />
+        <label id="dayLabel" x="8.8%" y="39.6%" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="00FF00" />
+        <label id="hourLabel" x="29%" y="27.9%" font="Graphics.FONT_NUMBER_MEDIUM" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00FF00" />
+        <label id="minLabel" x="50.5%" y="27.9%" font="Graphics.FONT_NUMBER_MEDIUM" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00FF00" />
+        <label id="texabLabel" x="64%" y="39.6%" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00FF00" />
+        <label id="monthLabel" x="74%" y="39.6%" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00FF00" />
+        <label id="yearLabel" x="90.8%" y="39.6%" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="00FF00" />
+
+        <label id="utcdayofweekLabel" x="8.8%" y="51%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="FFFF00" />
+        <label id="utcdayLabel" x="8.8%" y="56.5%" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="00AA00" />
+        <label id="utchourLabel" x="29%" y="45.1%" font="Graphics.FONT_NUMBER_MEDIUM" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00AA00" />
+        <label id="utcminLabel" x="50.5%" y="45.1%" font="Graphics.FONT_NUMBER_MEDIUM" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00AA00" />
+        <label id="texzLabel" x="64%" y="56.5%" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00AA00" />
+        <label id="utcmonthLabel" x="74%" y="56.5%" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00AA00" />
+        <label id="utcyearLabel" x="90.8%" y="56.5%" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="00AA00" />
+
+        <label id="mgrsZoneLabel" x="22%" y="69%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="FFFF00" />
+        <label id="mgrsSquareLabel" x="35.5%" y="69%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="FFFF00" />
+        <label id="mgrsEastingLabel" x="46.9%" y="69%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="FFFF00" />
+        <label id="mgrsNorthingLabel" x="66.2%" y="69%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="FFFF00" />
+
+        <label id="altitudeLabel" x="47.5%" y="79%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="00FFFF" />
+        <label id="texamslLabel" x="53%" y="79%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="00FFFF" />
+
+        <label id="hdngLabel" x="47.5%" y="86%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_RED" />
+        <label id="texangleLabel" x="49%" y="86%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_RED" />
+
+        <bitmap id="tac_lines" x="center" y="center" filename="/../../resources-fenix7x/drawables/tac_lines.svg" dithering="none" scaleX="100%" scaleY="100%"/>
+
+        <label id="aohourLabel" x="47%" y="32%" font="Graphics.FONT_NUMBER_HOT" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="00FF00" />
+        <label id="texaoLabel" x="49%" y="42%" font="Graphics.FONT_LARGE" justification="Graphics.TEXT_JUSTIFY_CENTER" color="FFFF00" />
+        <label id="aominLabel" x="53%" y="32%" font="Graphics.FONT_NUMBER_HOT" justification="Graphics.TEXT_JUSTIFY_LEFT" color="00FF00" />  
+    
+    </layout>
+</layouts>
