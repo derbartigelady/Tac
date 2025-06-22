@@ -25,7 +25,7 @@ Right now, this devices are supported:
 More Devices can be added - just ask.
 
 This is a learning project. It is not up to programmer standards!
-Tere are no options/settings in this watchface.
+There are no options/settings in this watchface.
 
 Layout positions are based on percentages. Graphics are embedded as .svg (vector graphics). 
 The main problems when adding new models are different font interpretations per model.
