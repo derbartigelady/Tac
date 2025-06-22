@@ -31,9 +31,11 @@ Right now, this devices are supported:
 - Forerunner 265 (..\Releases\fr265)
 
 Some Devices share the same Folder - dont worry
+
 More Devices can be added - just ask.
 
 This is a learning project. It is not up to programmer standards!
+
 There are no options/settings in this watchface.
 
 Layout positions are based on percentages. Graphics are embedded as .svg (vector graphics). 
