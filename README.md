@@ -2,9 +2,9 @@ Hello, here is a watchface for Outdoor/Mil use.
 
 ![Tac_preview](https://github.com/user-attachments/assets/27d953a2-85c1-4aee-87ba-af0ec6cae8e4)
 
-Newer Versions may differ from Screenshot.
+Newer Versions may differ from screenshot.
 
-Right now, this Devices are supported: 
+Right now, this devices are supported: 
 
 - Enduro 3 (..\Releases\enduro3)
 - tactix 7 – AMOLED Edition / Epix Pro (Gen 2) 51mm / D2 Mach 1 Pro (..\Releases\epix2pro51mm)
@@ -22,7 +22,7 @@ Right now, this Devices are supported:
 - Fenix 8 Solar 51mm / Tactix 8 Solar 51mm (..\Releases\fenix851mm)
 - Forerunner 265 (..\Releases\fr265)
 
-more Devices can be added - just ask
+More Devices can be added - just ask.
 
 This is a learning project. It is not up to programmer standards!
 Tere are no options/settings in this watchface.
