@@ -93,7 +93,7 @@ This "manual" code is not compatible to watchface builders like:
 Privacy
 
 - this watchface does not connect to the internet or garmin- / google- / apple-servers
-- the only external data use are GPS signals
+- the only external data use are positioning services like GPS, GLONASS, Galileo,... signals included in the Watch OS
 - best deal for privacy/battery/features: Enduro 3 is a Fenix 8 without microphone or speaker (only vibration) 
 
 If you dont want to use Garmin apps on your android phone for private reasons, you can use https://gadgetbridge.org/. It only connects to the watch and not to the www.
