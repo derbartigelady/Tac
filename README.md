@@ -55,7 +55,7 @@ Instructions for easy installation of the watchface:
 - Then connect the watch to the PC via USB cable, wait briefly until it is recognized as a drive and then open the path in Explorer: ...\yourWatchModel\Internal Storage\GARMIN\Apps. Copy the file here.
 - Disconnect the watch from the PC. The watch takes a moment to recognize and process the file and applies the file directly as a watchface.
 
-If you have a different model, the path may be named after a different model. I have not been able to test the file with other models, but please report what happens if you have a different model.
+If you have a different model, the path may be named after a different model. I could not test with other models, only simulate, feel free to report which model you are using and if the watchface runs.
 
 --------------------------------
 
@@ -66,7 +66,7 @@ Anleitung zur einfachen Installation der Watchface:
 - Dann Uhr mit dem PC via USB Kabel verbinden, kurz warten bis sie als Laufwerk erkannt wird und dann den Pfad im Explorer öffnen: ...\DeinUhrenModell\Internal Storage\GARMIN\Apps. Datei hierhin kopieren. 
 - Uhr vom PC trennen. Die Uhr braucht einen Augenblick bis die Datei erkannt und verarbeitet wurde und wendet die Datei direkt als Watchface an.
 
-Wenn man ein anderes Modell hat, kann der Pfad nach einem anderen Modell benannt sein. Ich konnte die Datei nicht mit anderen Modellen testen, aber berichtet gerne was bei euch passiert, wenn ihr ein anderes Modell habt.
+Wenn man ein anderes Modell hat, kann der Pfad nach einem anderen Modell benannt sein. Ich konnte nicht mit anderen Modellen testen, nur simulieren, berichtet gerne welches Modell ihr nutzt und ob die Watchface läuft.
 
 --------------------------------
 
