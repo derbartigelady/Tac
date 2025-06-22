@@ -25,7 +25,7 @@ Right now, this devices are supported:
 - Fenix 8 Solar 47mm (..\Releases\fenix8solar47mm)
 - Fenix 8 Solar 51mm (..\Releases\fenix851mm)
 - Tactix 7 (..\Releases\fenix7x)
-- tactix 7 – AMOLED Edition (..\Releases\epix2pro51mm)
+- Tactix 7 – AMOLED Edition (..\Releases\epix2pro51mm)
 - Tactix 8 47mm / 51mm (..\Releases\fenix847mm)
 - Tactix 8 Solar 51mm (..\Releases\fenix851mm)
 - Forerunner 265 (..\Releases\fr265)
