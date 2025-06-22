@@ -73,8 +73,8 @@ Software used:
 - Garmin SDK (https://developer.garmin.com/connect-iq/overview/)
 - Adobe Illustrator or Inkscape (https://inkscape.org/) for graphics editing
 - Microsoft Copilot (https://copilot.microsoft.com/chats/)
-Tutorials:
 
+Tutorials:
 - https://medium.com/@ericbt/design-your-own-garmin-watch-face-21d004d38f99
 - https://krasimirtsonev.com/blog/article/how-to-create-garmin-fenix-8-watch-face
 
