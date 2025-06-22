@@ -33,9 +33,9 @@ Right now, this devices are supported:
 Some Devices share the same Folder - dont worry.
 
 More Devices can be added - just ask here:
-https://www.reddit.com/r/bundeswehr/comments/1lek5bx/garmin_watchface/ 
+https://www.reddit.com/r/bundeswehr/comments/1lek5bx/garmin_watchface/
 
-or here 
+or here
 
 garmin-app-dev.chevron998@passmail.net
 
