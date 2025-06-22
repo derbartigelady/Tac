@@ -6,22 +6,31 @@ Newer Versions may differ from screenshot.
 
 Right now, this devices are supported: 
 
+- D2 Mach 1 Pro (..\Releases\epix2pro51mm)
+- Enduro 2 (..\Releases\fenix7x)
 - Enduro 3 (..\Releases\enduro3)
-- tactix 7 – AMOLED Edition / Epix Pro (Gen 2) 51mm / D2 Mach 1 Pro (..\Releases\epix2pro51mm)
+- Epix Pro (Gen 2) 51mm (..\Releases\epix2pro51mm)
+- tactix 7 – AMOLED Edition (..\Releases\epix2pro51mm)
 - Fenix 7 / Quatix 7 (..\Releases\fenix7)
 - Fenix 7 Pro (..\Releases\fenix7pro)
 - Fenix 7 Pro - Solar Edition (no Wi-Fi) (..\Releases\fenix7pronowifi)
 - Fenix 7S (..\Releases\fenix7s)
 - Fenix 7S Pro (..\Releases\fenix7pro)
-- Fenix 7X / Tactix 7 / Quatix 7X Solar / Enduro 2 (..\Releases\fenix7x)
+- Fenix 7X (..\Releases\fenix7x)
+- Quatix 7X Solar (..\Releases\fenix7x)
 - Fenix 7X Pro (..\Releases\fenix7xpro)
 - Fenix 7X Pro - Solar Edition (no Wi-Fi) (..\Releases\fenix7xpronowifi)
 - Fenix 8 43mm (..\Releases\fenix843mm)
-- Fenix 8 47mm / 51mm / Tactix 8 47mm / 51mm (..\Releases\fenix847mm)
+- Fenix 8 47mm / 51mm (..\Releases\fenix847mm)
 - Fenix 8 Solar 47mm (..\Releases\fenix8solar47mm)
-- Fenix 8 Solar 51mm / Tactix 8 Solar 51mm (..\Releases\fenix851mm)
+- Fenix 8 Solar 51mm (..\Releases\fenix851mm)
+- Tactix 7 (..\Releases\fenix7x)
+- tactix 7 – AMOLED Edition (..\Releases\epix2pro51mm)
+- Tactix 8 47mm / 51mm (..\Releases\fenix847mm)
+- Tactix 8 Solar 51mm (..\Releases\fenix851mm)
 - Forerunner 265 (..\Releases\fr265)
 
+Some Devices share the same Folder - dont worry
 More Devices can be added - just ask.
 
 This is a learning project. It is not up to programmer standards!
