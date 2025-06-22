@@ -91,4 +91,4 @@ This "manual" code is not compatible to watchface builders like:
 
 --------------------------------
 
-If you dont want to use Garmin apps on your phone for private reasons, you can use https://gadgetbridge.org/. It only connects to the watch and not to the www or Garmin servers.
+If you dont want to use Garmin apps on your android phone for private reasons, you can use https://gadgetbridge.org/. It only connects to the watch and not to the www or Garmin servers.
