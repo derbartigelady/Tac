@@ -1,4 +1,4 @@
-Hello, here is a watchface for Outdoor/Mil use.
+Hello, here is a Garmin watchface for Outdoor/Mil use.
 
 ![Tac_preview](https://github.com/user-attachments/assets/27d953a2-85c1-4aee-87ba-af0ec6cae8e4)
 
