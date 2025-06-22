@@ -32,11 +32,10 @@ Right now, this devices are supported:
 Some Devices share the same Folder - dont worry.
 
 More Devices can be added - just ask here:
-https://www.reddit.com/r/bundeswehr/comments/1lek5bx/garmin_watchface/
+- https://www.reddit.com/r/bundeswehr/comments/1lek5bx/garmin_watchface/
+- garmin-app-dev.chevron998@passmail.net
 
-or here
-
-garmin-app-dev.chevron998@passmail.net
+--------------------------------
 
 This is a learning project. It is not up to programmer standards!
 
@@ -70,38 +69,25 @@ Wenn man ein anderes Modell hat, kann der Pfad nach einem anderen Modell benannt
 --------------------------------
 
 Software used:
-
-Visual Studio Code (https://code.visualstudio.com/)
-
-Garmin SDK (https://developer.garmin.com/connect-iq/overview/)
-
-Adobe Illustrator or Inkscape (https://inkscape.org/) for graphics editing
-
-Microsoft Copilot (https://copilot.microsoft.com/chats/)
-
-
+- Visual Studio Code (https://code.visualstudio.com/)
+- Garmin SDK (https://developer.garmin.com/connect-iq/overview/)
+- Adobe Illustrator or Inkscape (https://inkscape.org/) for graphics editing
+- Microsoft Copilot (https://copilot.microsoft.com/chats/)
 Tutorials:
 
-https://medium.com/@ericbt/design-your-own-garmin-watch-face-21d004d38f99
-
-https://krasimirtsonev.com/blog/article/how-to-create-garmin-fenix-8-watch-face
+- https://medium.com/@ericbt/design-your-own-garmin-watch-face-21d004d38f99
+- https://krasimirtsonev.com/blog/article/how-to-create-garmin-fenix-8-watch-face
 
 
 Helpful:
-
-Garmin Forum
-
-Youtube
+- Garmin Forum
+- Youtube
 
 --------------------------------
 
-Info:
-
 This "manual" code is not compatible to watchface builders like:
-
-https://garmin.watchfacebuilder.com/
-
-https://facemaker.pt/
+- https://garmin.watchfacebuilder.com/
+- https://facemaker.pt/
 
 --------------------------------
 
