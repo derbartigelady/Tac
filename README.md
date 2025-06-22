@@ -29,7 +29,7 @@ Right now, this devices are supported:
 - Tactix 8 47mm / 51mm (..\Releases\fenix847mm)
 - Tactix 8 Solar 51mm (..\Releases\fenix851mm)
 
-Some Devices share the same Folder - dont worry.
+Some devices share the same folder - dont worry.
 
 More Devices can be added - just ask here:
 - https://www.reddit.com/r/bundeswehr/comments/1lek5bx/garmin_watchface/
