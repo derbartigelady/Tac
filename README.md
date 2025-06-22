@@ -92,7 +92,7 @@ This "manual" code is not compatible to watchface builders like:
 --------------------------------
 Privacy
 
-- This watchface does not connect to the internet or garmin- / google- / apple-servers
+- this watchface does not connect to the internet or garmin- / google- / apple-servers
 - the only external data use are GPS signals
 - best deal for privacy/battery/features: Enduro 3 is a Fenix 8 without microphone or speaker (only vibration) 
 
