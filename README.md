@@ -28,6 +28,11 @@ Right now, this devices are supported (some devices share the same folder - dont
 - Tactix 7 – AMOLED Edition (..\Releases\epix2pro51mm)
 - Tactix 8 47mm / 51mm (..\Releases\fenix847mm)
 - Tactix 8 Solar 51mm (..\Releases\fenix851mm)
+- Venu 2 (..\Releases\venu2)
+- Venu 2 Plus (..\Releases\venu2plus)
+- Venu 2 S (..\Releases\venu2s)
+- Venu 3 (..\Releases\venu3)
+- Venu 3 S (..\Releases\venu3s)
 
 More Devices can be added - just ask here:
 - https://www.reddit.com/r/bundeswehr/comments/1lek5bx/garmin_watchface/
