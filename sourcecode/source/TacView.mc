@@ -69,6 +69,9 @@ class TacView extends WatchUi.WatchFace {
         (View.findDrawableById("aohourLabel") as Text).setVisible(false);
         (View.findDrawableById("texaoLabel") as Text).setVisible(false);
         (View.findDrawableById("aominLabel") as Text).setVisible(false);
+        (View.findDrawableById("dateeLabel") as Text).setVisible(false);
+        (View.findDrawableById("stepsSumLabel") as Text).setVisible(false);
+        (View.findDrawableById("texgcLabel") as Text).setVisible(false);
     }
 
     function onShow() as Void {
@@ -221,6 +224,53 @@ class TacView extends WatchUi.WatchFace {
         var stepCount = Toybox.ActivityMonitor.getInfo().steps;
         var stepLabel = View.findDrawableById("stepLabel") as Text;
         stepLabel.setText(stepCount == null ? "-" : stepCount.format("%d"));
+
+        // "text GC"
+        var texgcLabel = View.findDrawableById("texgcLabel") as Text;
+        texgcLabel.setText("Gamescom steps");
+
+        // Schritte für Zeitraum 20.08.25 - 24.08.25 aufsummieren und anzeigen
+        var stepsSum = null;
+        var history = ActivityMonitor.getHistory();
+        var now = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
+
+        // Zielzeitraum definieren
+        var startYear = 2025, startMonth = 8, startDay = 20;
+        var endYear = 2025, endMonth = 8, endDay = 24;
+
+        // Datum als YYYYMMDD
+        var todayDate = now.year * 10000 + now.month * 100 + now.day;
+        var startDate = startYear * 10000 + startMonth * 100 + startDay;
+        var endDate = endYear * 10000 + endMonth * 100 + endDay;
+
+        // Prüfen, ob der Zeitraum im Verlauf abgedeckt ist
+        if (todayDate >= endDate && todayDate <= endDate + 6 && history != null) {
+            // Offset: wie viele Tage ist heute nach dem Enddatum?
+            var offset = todayDate - endDate;
+            // Index-Bereich im Verlauf bestimmen
+            var startIdx = offset + (endDate - startDate);
+            var endIdx = offset;
+            if (startIdx < history.size() && endIdx >= 0) {
+                stepsSum = 0;
+                for (var i = endIdx; i <= startIdx; i++) {
+                    var day = history[i];
+                    if (day != null && day.steps != null) {
+                        stepsSum += day.steps;
+                    }
+                }
+            }
+        }
+
+        // Schrittzahl anzeigen (nur wenn berechnet)
+        var stepsSumLabel = View.findDrawableById("stepsSumLabel") as Text;
+        if (stepsSumLabel != null) {
+            if (stepsSum != null) {
+                stepsSumLabel.setText(stepsSum.format("%d"));
+            } else {
+                stepsSumLabel.setText("-");
+            }
+        }
+
 
 
         // "Local"--------------------------------------------------------------------------------------------------
@@ -480,6 +530,18 @@ class TacView extends WatchUi.WatchFace {
         var aohourlabel = View.findDrawableById("aohourLabel") as Text;
         aohourlabel.setText(hourString);
 
+        // "datee"     
+        var dateeString = Lang.format(
+            "$1$.$2$.$3$",
+            [
+            now.day.format("%02d"),
+            now.month.format("%02d"),
+            now.year.format("%d").substring(2, 4)
+            ]
+        );
+        var dateelabel = View.findDrawableById("dateeLabel") as Text;
+        dateelabel.setText(dateeString);
+
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
         drawNorthTriangle(dc);
@@ -534,6 +596,9 @@ class TacView extends WatchUi.WatchFace {
         (View.findDrawableById("aohourLabel") as Text).setVisible(false);
         (View.findDrawableById("texaoLabel") as Text).setVisible(false);
         (View.findDrawableById("aominLabel") as Text).setVisible(false);
+        (View.findDrawableById("dateeLabel") as Text).setVisible(false);
+        (View.findDrawableById("stepsSumLabel") as Text).setVisible(false);
+        (View.findDrawableById("texgcLabel") as Text).setVisible(false);
     }
 
     // Terminate any active timers and prepare for slow updates.
@@ -579,8 +644,9 @@ class TacView extends WatchUi.WatchFace {
         (View.findDrawableById("aohourLabel") as Text).setVisible(true);
         (View.findDrawableById("texaoLabel") as Text).setVisible(true);        
         (View.findDrawableById("aominLabel") as Text).setVisible(true);
-        
-
+        (View.findDrawableById("dateeLabel") as Text).setVisible(true);
+        (View.findDrawableById("stepsSumLabel") as Text).setVisible(true);
+        (View.findDrawableById("texgcLabel") as Text).setVisible(true);
     }
 
 }
