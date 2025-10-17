@@ -13,16 +13,16 @@
 
         <label id="dayofweekLabel" x="8.8%" y="34%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="FFFF00" />
         <label id="dayLabel" x="8.8%" y="39.6%" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="00FF00" />
-        <label id="hourLabel" x="29%" y="30%" font="Graphics.FONT_NUMBER_MEDIUM" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00FF00" />
-        <label id="minLabel" x="50.5%" y="30%" font="Graphics.FONT_NUMBER_MEDIUM" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00FF00" />
+        <label id="hourLabel" x="29%" y="29.9%" font="Graphics.FONT_NUMBER_MEDIUM" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00FF00" />
+        <label id="minLabel" x="50.5%" y="29.9%" font="Graphics.FONT_NUMBER_MEDIUM" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00FF00" />
         <label id="texabLabel" x="64%" y="39.6%" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00FF00" />
         <label id="monthLabel" x="74%" y="39.6%" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00FF00" />
         <label id="yearLabel" x="90.8%" y="39.6%" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="00FF00" />
 
         <label id="utcdayofweekLabel" x="8.8%" y="51%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="FFFF00" />
         <label id="utcdayLabel" x="8.8%" y="56.5%" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="00AA00" />
-        <label id="utchourLabel" x="29%" y="47.2%" font="Graphics.FONT_NUMBER_MEDIUM" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00AA00" />
-        <label id="utcminLabel" x="50.5%" y="47.2%" font="Graphics.FONT_NUMBER_MEDIUM" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00AA00" />
+        <label id="utchourLabel" x="29%" y="47.1%" font="Graphics.FONT_NUMBER_MEDIUM" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00AA00" />
+        <label id="utcminLabel" x="50.5%" y="47.1%" font="Graphics.FONT_NUMBER_MEDIUM" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00AA00" />
         <label id="texzLabel" x="64%" y="56.5%" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00AA00" />
         <label id="utcmonthLabel" x="74%" y="56.5%" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00AA00" />
         <label id="utcyearLabel" x="90.8%" y="56.5%" font="Graphics.FONT_TINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="00AA00" />
@@ -40,10 +40,12 @@
 
         <bitmap id="tac_lines" x="center" y="center" filename="/../../resources-enduro3/drawables/tac_lines.svg" dithering="none" scaleX="100%" scaleY="100%"/>
 
-        <label id="aohourLabel" x="46%" y="19%" font="Graphics.FONT_NUMBER_THAI_HOT" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="00AA00" />
-        <label id="texaoLabel" x="50%" y="21.3%" font="Graphics.FONT_NUMBER_HOT" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00AA00" />
-        <label id="aominLabel" x="54%" y="19%" font="Graphics.FONT_NUMBER_THAI_HOT" justification="Graphics.TEXT_JUSTIFY_LEFT" color="00AA00" />  
+        <label id="aohourLabel" x="46%" y="14.3%" font="Graphics.FONT_NUMBER_HOT" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="CCCC00" />
+        <label id="texaoLabel" x="50%" y="19.9%" font="Graphics.FONT_NUMBER_MEDIUM" justification="Graphics.TEXT_JUSTIFY_CENTER" color="CCCC00" />
+        <label id="aominLabel" x="54%" y="14.3%" font="Graphics.FONT_NUMBER_HOT" justification="Graphics.TEXT_JUSTIFY_LEFT" color="CCCC00" />  
+        
+        <label id="texzaoLabel" x="50%" y="46%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_CENTER" color="666666" />
+        
         <label id="aodateLabel" x="50%" y="54%" font="Graphics.FONT_NUMBER_MILD" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00AA00" />  
-    
     </layout>
 </layouts>

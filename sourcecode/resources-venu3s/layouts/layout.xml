@@ -40,9 +40,11 @@
 
         <bitmap id="tac_lines" x="center" y="center" filename="/../../resources-venu3s/drawables/tac_lines.svg" dithering="none" scaleX="100%" scaleY="100%"/>
 
-        <label id="aohourLabel" x="46%" y="19%" font="Graphics.FONT_NUMBER_THAI_HOT" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="00AA00" />
-        <label id="texaoLabel" x="50%" y="21.3%" font="Graphics.FONT_NUMBER_HOT" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00AA00" />
-        <label id="aominLabel" x="54%" y="19%" font="Graphics.FONT_NUMBER_THAI_HOT" justification="Graphics.TEXT_JUSTIFY_LEFT" color="00AA00" />  
-        <label id="aodateLabel" x="50%" y="54%" font="Graphics.FONT_NUMBER_MILD" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00AA00" />
-    </layout>
+        <label id="aohourLabel" x="46%" y="14.8%" font="Graphics.FONT_NUMBER_HOT" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="CCCC00" />
+        <label id="texaoLabel" x="50%" y="19.5%" font="Graphics.FONT_NUMBER_MEDIUM" justification="Graphics.TEXT_JUSTIFY_CENTER" color="CCCC00" />
+        <label id="aominLabel" x="54%" y="14.8%" font="Graphics.FONT_NUMBER_HOT" justification="Graphics.TEXT_JUSTIFY_LEFT" color="CCCC00" />  
+        
+        <label id="texzaoLabel" x="50%" y="46%" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_CENTER" color="666666" />
+        
+        <label id="aodateLabel" x="50%" y="53.5%" font="Graphics.FONT_NUMBER_MILD" justification="Graphics.TEXT_JUSTIFY_CENTER" color="00AA00" />        </layout>
 </layouts>
