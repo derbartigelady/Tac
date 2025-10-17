@@ -1,8 +1,6 @@
 Hello, here is a Garmin watchface for Outdoor/Mil use.
 
-![Tac_preview]([https://github.com/user-attachments/assets/27d953a2-85c1-4aee-87ba-af0ec6cae8e4])
-
-[tac_prev.png](https://github.com/derbartigelady/Tac/blob/a3875bb9b3ef363bc6d35ed68dbf8e6a8a919829/tac_prev.png)
+![tac_prev](https://github.com/derbartigelady/Tac/blob/a3875bb9b3ef363bc6d35ed68dbf8e6a8a919829/tac_prev.png)
 
 Newer Versions may differ from screenshot.
 
