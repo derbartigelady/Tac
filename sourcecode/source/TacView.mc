@@ -9,91 +9,182 @@ import Toybox.Activity;
 import Toybox.Position;
 import Toybox.Sensor;
 import Toybox.Application;
-import Toybox.WatchUi;
 import Toybox.Math;
-
-
 
 class TacView extends WatchUi.WatchFace {
 
-    var _showNorthTriangle = true; // Flag zum Steuern der Sichtbarkeit
+    var _showNorthTriangle = true;
     var _isSleeping = false;
 
+    // cached drawables (declare without explicit types so they may be null until onLayout)
+    var _iconBellOn;
+    var _iconBellOff;
+    var _iconBtOn;
+    var _iconBtOff;
 
+    var _lblSec;
+    var _lblStep;
+    var _lblBattery;
+    var _lblHeart;
+
+    var _lblDayOfWeek;
+    var _lblDay;
+    var _lblMin;
+    var _lblHour;
+    var _lblMonth;
+    var _lblYear;
+
+    var _lblUtcDayOfWeek;
+    var _lblUtcDay;
+    var _lblUtcHour;
+    var _lblUtcMin;
+    var _lblUtcMonth;
+    var _lblUtcYear;
+    var _lblTexZ;
+    var _lblTexAB;
+
+    var _mgrsZoneLabel;
+    var _mgrsSquareLabel;
+    var _mgrsEastingLabel;
+    var _mgrsNorthingLabel;
+
+    var _altitudeLabel;
+    var _texamslLabel;
+
+    var _hdngLabel;
+    var _texangleLabel;
+
+    var _tacLines;
+
+    var _aohourLabel;
+    var _aominLabel;
+    var _texaoLabel;
+    var _texzaoLabel;
+    var _aodateLabel;
+
+    // initialize
     function initialize() {
-        WatchFace.initialize();
-        
+        WatchUi.WatchFace.initialize();
+    }
+
+    // helper: safe setVisible / setText
+    function setVisibleIfExistsByRef(el, visible as Boolean) as Void {
+        if (el != null) {
+            el.setVisible(visible);
+        }
+    }
+    function setTextIfExistsByRef(el, txt as String) as Void {
+        if (el != null) {
+            el.setText(txt);
+        }
     }
 
     function onLayout(dc as Dc) as Void {
+        // device-independent layout reference
         setLayout(Rez.Layouts.WatchFace(dc));
-        (View.findDrawableById("icon_note_on") as Bitmap).setVisible(true);
-        (View.findDrawableById("icon_note_off") as Bitmap).setVisible(true);
-        (View.findDrawableById("secLabel") as Text).setVisible(true);
-        (View.findDrawableById("texsecLabel") as Text).setVisible(true);
-        (View.findDrawableById("bt_on") as Bitmap).setVisible(true);
-        (View.findDrawableById("bt_off") as Bitmap).setVisible(true);
 
-        (View.findDrawableById("stepLabel") as Text).setVisible(true);
-        (View.findDrawableById("batteryLabel") as Text).setVisible(true);
-        (View.findDrawableById("heartRateLabel") as Text).setVisible(true);
+        // cache drawables (typecast where useful)
+        _iconBellOn = View.findDrawableById("icon_note_on") as Bitmap;
+        _iconBellOff = View.findDrawableById("icon_note_off") as Bitmap;
+        _iconBtOn = View.findDrawableById("bt_on") as Bitmap;
+        _iconBtOff = View.findDrawableById("bt_off") as Bitmap;
 
-        (View.findDrawableById("dayofweekLabel") as Text).setVisible(true);
-        (View.findDrawableById("dayLabel") as Text).setVisible(true);
-        (View.findDrawableById("utchourLabel") as Text).setVisible(true);
-        (View.findDrawableById("utcminLabel") as Text).setVisible(true);
-        (View.findDrawableById("texabLabel") as Text).setVisible(true);
-        (View.findDrawableById("monthLabel") as Text).setVisible(true);
-        (View.findDrawableById("yearLabel") as Text).setVisible(true);
+        _lblSec = View.findDrawableById("secLabel") as Text;
+        _lblStep = View.findDrawableById("stepLabel") as Text;
+        _lblBattery = View.findDrawableById("batteryLabel") as Text;
+        _lblHeart = View.findDrawableById("heartRateLabel") as Text;
 
-        (View.findDrawableById("utcdayofweekLabel") as Text).setVisible(true);
-        (View.findDrawableById("utcdayLabel") as Text).setVisible(true);
-        (View.findDrawableById("utchourLabel") as Text).setVisible(true);
-        (View.findDrawableById("utcminLabel") as Text).setVisible(true);
-        (View.findDrawableById("texzLabel") as Text).setVisible(true);
-        (View.findDrawableById("utcmonthLabel") as Text).setVisible(true);
-        (View.findDrawableById("utcyearLabel") as Text).setVisible(true);
+        _lblDayOfWeek = View.findDrawableById("dayofweekLabel") as Text;
+        _lblDay = View.findDrawableById("dayLabel") as Text;
+        _lblMin = View.findDrawableById("minLabel") as Text;
+        _lblHour = View.findDrawableById("hourLabel") as Text;
+        _lblMonth = View.findDrawableById("monthLabel") as Text;
+        _lblYear = View.findDrawableById("yearLabel") as Text;
 
-        (View.findDrawableById("mgrsZoneLabel") as Text).setVisible(true);
-        (View.findDrawableById("mgrsSquareLabel") as Text).setVisible(true);
-        (View.findDrawableById("mgrsEastingLabel") as Text).setVisible(true);
-        (View.findDrawableById("mgrsNorthingLabel") as Text).setVisible(true);
+        _lblUtcDayOfWeek = View.findDrawableById("utcdayofweekLabel") as Text;
+        _lblUtcDay = View.findDrawableById("utcdayLabel") as Text;
+        _lblUtcHour = View.findDrawableById("utchourLabel") as Text;
+        _lblUtcMin = View.findDrawableById("utcminLabel") as Text;
+        _lblUtcMonth = View.findDrawableById("utcmonthLabel") as Text;
+        _lblUtcYear = View.findDrawableById("utcyearLabel") as Text;
+        _lblTexZ = View.findDrawableById("texzLabel") as Text;
+        _lblTexAB = View.findDrawableById("texabLabel") as Text;
 
-        (View.findDrawableById("altitudeLabel") as Text).setVisible(true);
-        (View.findDrawableById("texamslLabel") as Text).setVisible(true);
+        _mgrsZoneLabel = View.findDrawableById("mgrsZoneLabel") as Text;
+        _mgrsSquareLabel = View.findDrawableById("mgrsSquareLabel") as Text;
+        _mgrsEastingLabel = View.findDrawableById("mgrsEastingLabel") as Text;
+        _mgrsNorthingLabel = View.findDrawableById("mgrsNorthingLabel") as Text;
 
-        (View.findDrawableById("hdngLabel") as Text).setVisible(true);
-        (View.findDrawableById("texangleLabel") as Text).setVisible(true);
-        (View.findDrawableById("tac_lines") as Bitmap).setVisible(true);
+        _altitudeLabel = View.findDrawableById("altitudeLabel") as Text;
+        _texamslLabel = View.findDrawableById("texamslLabel") as Text;
 
-        (View.findDrawableById("aohourLabel") as Text).setVisible(false);
-        (View.findDrawableById("texaoLabel") as Text).setVisible(false);
-        (View.findDrawableById("aominLabel") as Text).setVisible(false);
-        (View.findDrawableById("aodateLabel") as Text).setVisible(false);
-    }
+        _hdngLabel = View.findDrawableById("hdngLabel") as Text;
+        _texangleLabel = View.findDrawableById("texangleLabel") as Text;
 
-    function onShow() as Void {
-    }
+        _tacLines = View.findDrawableById("tac_lines") as Bitmap;
 
-    function setNorthTriangleInvisible() as Void {
-        _showNorthTriangle = false;
-    }
+        _aohourLabel = View.findDrawableById("aohourLabel") as Text;
+        _aominLabel = View.findDrawableById("aominLabel") as Text;
+        _texaoLabel = View.findDrawableById("texaoLabel") as Text;
+        _texzaoLabel = View.findDrawableById("texzaoLabel") as Text;
+        _aodateLabel = View.findDrawableById("aodateLabel") as Text;
 
-    function setNorthTriangleVisible() as Void {
-        _showNorthTriangle = true;
+        // initial visibilities (safe)
+        setVisibleIfExistsByRef(_iconBellOn, true);
+        setVisibleIfExistsByRef(_iconBellOff, true);
+        setVisibleIfExistsByRef(_iconBtOn, true);
+        setVisibleIfExistsByRef(_iconBtOff, true);
+
+        setVisibleIfExistsByRef(_lblSec, true);
+        setVisibleIfExistsByRef(_lblStep, true);
+        setVisibleIfExistsByRef(_lblBattery, true);
+        setVisibleIfExistsByRef(_lblHeart, true);
+
+        setVisibleIfExistsByRef(_lblDayOfWeek, true);
+        setVisibleIfExistsByRef(_lblDay, true);
+        setVisibleIfExistsByRef(_lblHour, true);
+        setVisibleIfExistsByRef(_lblMin, true);
+        setVisibleIfExistsByRef(_lblMonth, true);
+        setVisibleIfExistsByRef(_lblYear, true);
+
+        setVisibleIfExistsByRef(_lblUtcDayOfWeek, true);
+        setVisibleIfExistsByRef(_lblUtcDay, true);
+        setVisibleIfExistsByRef(_lblUtcHour, true);
+        setVisibleIfExistsByRef(_lblUtcMin, true);
+        setVisibleIfExistsByRef(_lblTexZ, true);
+        setVisibleIfExistsByRef(_lblUtcMonth, true);
+        setVisibleIfExistsByRef(_lblUtcYear, true);
+
+        setVisibleIfExistsByRef(_mgrsZoneLabel, true);
+        setVisibleIfExistsByRef(_mgrsSquareLabel, true);
+        setVisibleIfExistsByRef(_mgrsEastingLabel, true);
+        setVisibleIfExistsByRef(_mgrsNorthingLabel, true);
+
+        setVisibleIfExistsByRef(_altitudeLabel, true);
+        setVisibleIfExistsByRef(_texamslLabel, true);
+
+        setVisibleIfExistsByRef(_hdngLabel, true);
+        setVisibleIfExistsByRef(_texangleLabel, true);
+        setVisibleIfExistsByRef(_tacLines, true);
+
+        setVisibleIfExistsByRef(_aohourLabel, false);
+        setVisibleIfExistsByRef(_texaoLabel, false);
+        setVisibleIfExistsByRef(_texzaoLabel, false);
+        setVisibleIfExistsByRef(_aominLabel, false);
+        setVisibleIfExistsByRef(_aodateLabel, false);
     }
 
     function drawNorthTriangle(dc as Dc) as Void {
         if (!_showNorthTriangle) {
-            // Dreieck nicht zeichnen, wenn Flag false ist
             return;
         }
 
-        var heading = Activity.getActivityInfo().currentHeading;
-        if (heading == null) {
+        var actInfo = Activity.getActivityInfo();
+        if (actInfo == null || actInfo.currentHeading == null) {
             return;
         }
 
+        var heading = actInfo.currentHeading;
         var cx = dc.getWidth() / 2;
         var cy = dc.getHeight() / 2;
 
@@ -101,33 +192,29 @@ class TacView extends WatchUi.WatchFace {
         if (deg < 0) {
             deg += 360;
         }
-        var angleDeg = Math.round(deg).toNumber(); // Jetzt garantiert Number!
+        var angleDeg = Math.round(deg).toNumber();
 
-        // Gradzahl im Label ausgeben
-        var hdngLabel = View.findDrawableById("hdngLabel") as Text;
-        hdngLabel.setText((360 - angleDeg) % 360 + "");
+        if (_hdngLabel != null) {
+            _hdngLabel.setText(((360 - angleDeg) % 360).toString());
+        }
+        if (_texangleLabel != null) {
+            _texangleLabel.setText("° N");
+        }
 
-        // "text angle"
-        var texangleLabel = View.findDrawableById("texangleLabel") as Text;
-        texangleLabel.setText("° N");
-
-        // Bogenmaß-Winkel berechnen
         var angleC = Math.toRadians(-angleDeg.toFloat());
         var degL = ((angleDeg - 4 + 360) % 360);
         var degR = ((angleDeg + 4) % 360);
         var angleL = Math.toRadians(-degL.toFloat());
         var angleR = Math.toRadians(-degR.toFloat());
 
-        // Dreieck-Radien als Prozent vom kleineren Displaymaß
         var minDim = (dc.getWidth() < dc.getHeight() ? dc.getWidth() : dc.getHeight()).toFloat();
-        var rMain = minDim * 0.47; // z.B. 45% vom kleineren Maß
-        var rWing = minDim * 0.44; // z.B. 42% vom kleineren Maß
+        var rMain = minDim * 0.47;
+        var rWing = minDim * 0.44;
 
         var ptC = polarToXY(angleC, rMain, cx.toFloat(), cy.toFloat());
         var ptL = polarToXY(angleL, rWing, cx.toFloat(), cy.toFloat());
         var ptR = polarToXY(angleR, rWing, cx.toFloat(), cy.toFloat());
 
-        // Zeichnen
         dc.setColor(Graphics.COLOR_RED, Graphics.COLOR_BLACK);
         dc.fillPolygon([
             [ptC[0].toNumber(), ptC[1].toNumber()],
@@ -140,464 +227,344 @@ class TacView extends WatchUi.WatchFace {
         return [cx + length * Math.sin(angle), cy - length * Math.cos(angle)];
     }
 
-
-// "Alle anderen Dinge"--------------------------------------------------------------------------------------------------
-
-
     function onUpdate(dc as Dc) as Void {
-        // Layout-Elemente aktualisieren
+        // update once per frame
         View.onUpdate(dc);
 
-        // Bluetooth-Verbindung prüfen
-        var phoneConnected = Toybox.System.getDeviceSettings().phoneConnected;
-        var btOn = View.findDrawableById("bt_on") as Bitmap;
-        var btOff = View.findDrawableById("bt_off") as Bitmap;
+        // compute time objects once
+        var nowShort = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
+        var nowMedium = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
 
+        // Bluetooth
+        var phoneConnected = System.getDeviceSettings().phoneConnected;
         if (!_isSleeping) {
             if (phoneConnected) {
-                btOn.setVisible(true);
-                btOff.setVisible(false);
+                setVisibleIfExistsByRef(_iconBtOn, true);
+                setVisibleIfExistsByRef(_iconBtOff, false);
             } else {
-                btOn.setVisible(false);
-                btOff.setVisible(true);
+                setVisibleIfExistsByRef(_iconBtOn, false);
+                setVisibleIfExistsByRef(_iconBtOff, true);
             }
         } else {
-            btOn.setVisible(false);
-            btOff.setVisible(false);
+            setVisibleIfExistsByRef(_iconBtOn, false);
+            setVisibleIfExistsByRef(_iconBtOff, false);
         }
 
+        // sec
+        var secInfo = nowShort;
+        var secString = secInfo != null ? secInfo.sec.format("%02d") : "--";
+        setTextIfExistsByRef(_lblSec, secString);
 
-        // "sec"
-        var sec = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-        var secString = Lang.format(
-            "$1$",
-            [
-                sec.sec.format("%02d"),
-            ]
-        );
-        var seclabel = View.findDrawableById("secLabel") as Text;
-        seclabel.setText(secString);
-
-
-        // "Notifications"
+        // notifications
         var notifications = System.getDeviceSettings().notificationCount;
-        var bellOn = View.findDrawableById("icon_note_on") as Bitmap;
-        var bellOff = View.findDrawableById("icon_note_off") as Bitmap;
-
         if (!_isSleeping) {
             if (notifications > 0) {
-                bellOn.setVisible(true);
-                bellOff.setVisible(false);
+                setVisibleIfExistsByRef(_iconBellOn, true);
+                setVisibleIfExistsByRef(_iconBellOff, false);
             } else {
-                bellOn.setVisible(false);
-                bellOff.setVisible(true);
+                setVisibleIfExistsByRef(_iconBellOn, false);
+                setVisibleIfExistsByRef(_iconBellOff, true);
             }
         } else {
-            bellOn.setVisible(false);
-            bellOff.setVisible(false);
+            setVisibleIfExistsByRef(_iconBellOn, false);
+            setVisibleIfExistsByRef(_iconBellOff, false);
         }
 
+        // battery
+        var battery = System.getSystemStats().battery;
+        if (_lblBattery != null) {
+            _lblBattery.setText(battery.format("%d"));
+        }
 
-        // "Battery"
-        var battery = Toybox.System.getSystemStats().battery;
-        var batteryLabel = View.findDrawableById("batteryLabel") as Text;
-        batteryLabel.setText(battery.format("%d"));
-       
-
-        // "Puls"
-        var heartRate = 0;
+        // heart rate
         var heartRateText = "-";
         var actInfo = Activity.getActivityInfo();
-        if (actInfo != null) {
-            heartRate = actInfo.currentHeartRate;    
-            if (heartRate != 0 && heartRate != null) {
-                heartRateText = heartRate.format("%d");
-            }
+        if (actInfo != null && actInfo.currentHeartRate != null && actInfo.currentHeartRate != 0) {
+            heartRateText = actInfo.currentHeartRate.format("%d");
         }
-        var heartRateLabel = View.findDrawableById("heartRateLabel") as Text;
-        heartRateLabel.setText(heartRateText);
+        setTextIfExistsByRef(_lblHeart, heartRateText);
 
+        // steps (today)
+        var stepCount = ActivityMonitor.getInfo().steps;
+        if (_lblStep != null) {
+            _lblStep.setText(stepCount == null ? "-" : stepCount.format("%d"));
+        }
 
-        // "steps"
-        var stepCount = Toybox.ActivityMonitor.getInfo().steps;
-        var stepLabel = View.findDrawableById("stepLabel") as Text;
-        stepLabel.setText(stepCount == null ? "-" : stepCount.format("%d"));
-
-
-        // "Local"--------------------------------------------------------------------------------------------------
-
-
-        // "Weekdays"
+        // LOCAL: weekday
         var currentTime = Time.now();
         var dayofweekInfo = Gregorian.info(currentTime, Time.FORMAT_SHORT);
         var weekDays = ["Sa", "So", "Mo", "Di", "Mi", "Do", "Fr"];
-        var dayofweekString = "??"; // Fallback-Wert sicherstellen
-        // Falls Garmin Sonntag als 7 speichert, setzen wir ihn auf 0
-        if (dayofweekInfo.day_of_week == 7) {
-            dayofweekInfo.day_of_week = 0;
+        var dowIdx = (dayofweekInfo != null && dayofweekInfo.day_of_week != null) ? dayofweekInfo.day_of_week : 0;
+        if (dowIdx == 7) {
+            dowIdx = 0;
         }
-        // Sicherheitsprüfung für den Index
-        if (dayofweekInfo.day_of_week >= 0 && dayofweekInfo.day_of_week < weekDays.size()) {
-            dayofweekString = weekDays[dayofweekInfo.day_of_week];
-        } else {
-            System.println("Warnung: Ungültiger Index für day_of_week nach Korrektur: " + dayofweekInfo.day_of_week);
+        var dayofweekString = (dowIdx >= 0 && dowIdx < weekDays.size()) ? weekDays[dowIdx] : "??";
+        setTextIfExistsByRef(_lblDayOfWeek, dayofweekString);
+
+        // day
+        var dayString = nowShort != null ? nowShort.day.format("%02d") : "--";
+        setTextIfExistsByRef(_lblDay, dayString);
+
+        // min
+        var minString = nowMedium != null ? nowMedium.min.format("%02d") : "--";
+        setTextIfExistsByRef(_lblMin, minString);
+
+        // month (DE, 3 letters)
+        var germanMonths = ["jan","feb","mär","apr","mai","jun","jul","aug","sep","okt","nov","dez"];
+        var mIndex = (nowShort != null && nowShort.month != null) ? (nowShort.month - 1) : 0;
+        var monthString = germanMonths[(mIndex >= 0 && mIndex < germanMonths.size()) ? mIndex : 0];
+        setTextIfExistsByRef(_lblMonth, monthString);
+
+        // year (YY)
+        var yearString = nowShort != null ? nowShort.year.format("%d").substring(2,4) : "--";
+        setTextIfExistsByRef(_lblYear, yearString);
+
+        // UTC: weekday
+        var utcNow = Time.now();
+        var utcDayOfWeekInfo = Gregorian.info(utcNow, Time.FORMAT_SHORT);
+        var utcWeekDays = ["sa","su","mo","tu","we","th","fr"];
+        var utcDowIdx = (utcDayOfWeekInfo != null && utcDayOfWeekInfo.day_of_week != null) ? utcDayOfWeekInfo.day_of_week : 0;
+        if (utcDowIdx == 7) {
+            utcDowIdx = 0;
         }
-        // Setze den Wert ins UI-Element
-        var dayofweeklabel = View.findDrawableById("dayofweekLabel") as Text;
-        dayofweeklabel.setText(dayofweekString);
+        var utcDayOfWeekString = (utcDowIdx >= 0 && utcDowIdx < utcWeekDays.size()) ? utcWeekDays[utcDowIdx] : "??";
+        setTextIfExistsByRef(_lblUtcDayOfWeek, utcDayOfWeekString);
 
-        
-        // "day"
-        var day = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-        var dayString = Lang.format(
-            "$1$",
-            [
-                day.day.format("%02d"),
-            ]
-        );
-        var daylabel = View.findDrawableById("dayLabel") as Text;
-        daylabel.setText(dayString);
+        // dayUTC
+        var utcDayInfo = Gregorian.utcInfo(utcNow, Time.FORMAT_SHORT);
+        var utcDayString = utcDayInfo != null ? utcDayInfo.day.format("%02d") : "--";
+        setTextIfExistsByRef(_lblUtcDay, utcDayString);
 
+        // minUTC
+        var utcMinInfo = Gregorian.utcInfo(utcNow, Time.FORMAT_MEDIUM);
+        var utcMinString = utcMinInfo != null ? utcMinInfo.min.format("%02d") : "--";
+        setTextIfExistsByRef(_lblUtcMin, utcMinString);
 
-        // "min"
-        var min = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
-        var minString = Lang.format(
-            "$1$",
-            [
-            min.min.format("%02d"),
-            ]
-        );
-        var minlabel = View.findDrawableById("minLabel") as Text;
-        minlabel.setText(minString);
+        // text Z
+        setTextIfExistsByRef(_lblTexZ, "Z");
 
+        // monthUTC (EN, 3 letters)
+        var utcMonthInfo = Gregorian.utcInfo(utcNow, Time.FORMAT_SHORT);
+        var englishMonths = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
+        var umIndex = (utcMonthInfo != null && utcMonthInfo.month != null) ? (utcMonthInfo.month - 1) : 0;
+        var utcmonthString = englishMonths[(umIndex >= 0 && umIndex < englishMonths.size()) ? umIndex : 0];
+        setTextIfExistsByRef(_lblUtcMonth, utcmonthString);
 
+        // yearUTC
+        var utcYearString = utcMonthInfo != null ? utcMonthInfo.year.format("%d").substring(2,4) : "--";
+        setTextIfExistsByRef(_lblUtcYear, utcYearString);
 
+        // LOCAL/UTC AB calculation
+        var hourInfo = nowMedium;
+        var hourString = hourInfo != null ? hourInfo.hour.format("%02d") : "--";
+        setTextIfExistsByRef(_lblHour, hourString);
 
-        // "month"
-        var month = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
-        var monthString = Lang.format(
-            "$1$",
-            [
-                month.month.toLower(),
-            ]
-        );
-        var monthlabel = View.findDrawableById("monthLabel") as Text;
-        monthlabel.setText(monthString);
+        var utcHourInfo = Gregorian.utcInfo(utcNow, Time.FORMAT_MEDIUM);
+        var utcHourString = utcHourInfo != null ? utcHourInfo.hour.format("%02d") : "--";
+        setTextIfExistsByRef(_lblUtcHour, utcHourString);
 
-
-        // "year"
-        var year = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-        var yearString = Lang.format(
-            "$1$",
-            [
-                year.year.format("%d").substring(2, 4), // Nur die letzten beiden Ziffern
-            ]
-        );
-        var yearlabel = View.findDrawableById("yearLabel") as Text;
-        yearlabel.setText(yearString);
-
-
-        // "UTC"--------------------------------------------------------------------------------------------------
-
-
-        // "WeekdaysUTC"
-        var utccurrentTime = Time.now();
-        var utcdayofweekInfo = Gregorian.info(utccurrentTime, Time.FORMAT_SHORT);
-        var utcweekDays = ["sa", "su", "mo", "tu", "we", "th", "fr"];
-        var utcdayofweekString = "??"; // Fallback-Wert sicherstellen
-        // Falls Garmin Sonntag als 7 speichert, setzen wir ihn auf 0
-        if (utcdayofweekInfo.day_of_week == 7) {
-            utcdayofweekInfo.day_of_week = 0;
+        var timeDifference = 0;
+        if (hourInfo != null && utcHourInfo != null) {
+            timeDifference = hourInfo.hour - utcHourInfo.hour;
+            if (timeDifference < 0) {
+                timeDifference = -timeDifference;
+            }
         }
-        // Sicherheitsprüfung für den Index
-        if (utcdayofweekInfo.day_of_week >= 0 && utcdayofweekInfo.day_of_week < utcweekDays.size()) {
-            utcdayofweekString = utcweekDays[utcdayofweekInfo.day_of_week];
-        } else {
-            System.println("Warnung: Ungültiger Index für day_of_week nach Korrektur: " + utcdayofweekInfo.day_of_week);
-        }
-        // Setze den Wert ins UI-Element
-        var utcdayofweeklabel = View.findDrawableById("utcdayofweekLabel") as Text;
-        utcdayofweeklabel.setText(utcdayofweekString);
-
-        
-        // "dayUTC"
-        var dayutc = Time.now();
-        var utcday = Gregorian.utcInfo(dayutc, Time.FORMAT_SHORT);
-        var utcdayString = Lang.format(
-            "$1$",
-            [
-                utcday.day.format("%02d"),
-            ]
-        );
-        var utcdaylabel = View.findDrawableById("utcdayLabel") as Text;
-        utcdaylabel.setText(utcdayString);
-
-
-        // "minUTC"
-        var minutc = Time.now();
-        var utcmin = Gregorian.utcInfo(minutc, Time.FORMAT_MEDIUM);
-        var utcminString = Lang.format(
-            "$1$",
-            [
-                utcmin.min.format("%02d"),
-            ]
-        );
-        var utcminlabel = View.findDrawableById("utcminLabel") as Text;
-        utcminlabel.setText(utcminString);
-
-
-        // "text Z"
-        var texzLabel = View.findDrawableById("texzLabel") as Text;
-        texzLabel.setText("Z");
-
-
-        // "monthUTC"
-        var monthutc = Time.now();
-        var utcmonth = Gregorian.utcInfo(monthutc, Time.FORMAT_MEDIUM);
-        var utcmonthString = Lang.format(
-            "$1$",
-            [
-                utcmonth.month.toLower(),
-            ]
-        );
-        var utcmonthlabel = View.findDrawableById("utcmonthLabel") as Text;
-        utcmonthlabel.setText(utcmonthString);
-
-
-        // "yearUTC"
-        var yearutc = Time.now();
-        var utcyear = Gregorian.utcInfo(yearutc, Time.FORMAT_SHORT);
-        var utcyearString = Lang.format(
-            "$1$",
-            [
-                utcyear.year.format("%d").substring(2, 4), // Nur die letzten beiden Ziffern
-            ]
-        );
-        var utcyearlabel = View.findDrawableById("utcyearLabel") as Text;
-        utcyearlabel.setText(utcyearString);
-
-
-        // "LOCAL / UTC A B Berechnung"--------------------------------------------------------------------------------------------------
-
-
-        // "hour"
-        var hour = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
-        var hourString = Lang.format(
-            "$1$",
-            [
-                hour.hour.format("%02d"),
-            ]
-        );
-        var hourlabel = View.findDrawableById("hourLabel") as Text;
-        hourlabel.setText(hourString);
-
-        // "hourUTC"
-        var utchour = Time.now();
-        var hourutc = Gregorian.utcInfo(utchour, Time.FORMAT_MEDIUM);
-
-        var hourutcString = Lang.format(
-            "$1$",
-            [
-                hourutc.hour.format("%02d"),
-            ]
-        );
-        var hourutclabel = View.findDrawableById("utchourLabel") as Text;
-        hourutclabel.setText(hourutcString);
-
-        // Unterschied berechnen
-        var timeDifference = hour.hour - hourutc.hour;
-        if (timeDifference < 0) {
-            timeDifference = -timeDifference; // Sicherstellen, dass es positiv ist
-        }
-
-        // "text AB"
         var texab = "";
         if (timeDifference == 2) {
             texab = "B";
         } else if (timeDifference == 1) {
             texab = "A";
         }
+        setTextIfExistsByRef(_lblTexAB, texab);
 
-        var texabLabel = View.findDrawableById("texabLabel") as Text;
-        texabLabel.setText(texab);
-    
+        // Position / MGRS - layout-aware parsing and label updates
+        try {
+            var posInfo = Position.getInfo();
+            if (posInfo != null && posInfo.position != null) {
+                var myLocation = posInfo.position;
+                var mgrsString = myLocation.toGeoString(Position.GEO_MGRS);
+                if (mgrsString != null) {
+                    // Entferne Leerzeichen aus der MGRS-Zeichenkette
+                    var mgrsChars = mgrsString.toCharArray();
+                    var mgrsCleaned = "";
+                    for (var i = 0; i < mgrsChars.size(); i++) {
+                        if (!mgrsChars[i].equals(' ')) {
+                            mgrsCleaned = mgrsCleaned + mgrsChars[i];
+                        }
+                    }
+                    // Überprüfen, ob die Länge stimmt
+                    if (mgrsCleaned.length() != 15) {
+                        // Zeige Fehlertext in Zone-Label, leere die anderen Felder
+                        setTextIfExistsByRef(_mgrsZoneLabel, "BAD MGRS DATA");
+                        setTextIfExistsByRef(_mgrsSquareLabel, "");
+                        setTextIfExistsByRef(_mgrsEastingLabel, "");
+                        setTextIfExistsByRef(_mgrsNorthingLabel, "");
+                    } else {
+                        // Einzelne Teile der MGRS-Koordinate extrahieren
+                        var mgrsZone = mgrsCleaned.substring(0, 3);
+                        var mgrsSquare = mgrsCleaned.substring(3, 5);
+                        var mgrsEasting = mgrsCleaned.substring(5, 10);
+                        var mgrsNorthing = mgrsCleaned.substring(10, 15);
 
-        // "STUFF"--------------------------------------------------------------------------------------------------
-
-
-        var myLocation = Position.getInfo().position;
-        var mgrsString = myLocation.toGeoString(Position.GEO_MGRS);
-
-        // Entferne Leerzeichen aus der MGRS-Zeichenkette
-        var mgrsChars = mgrsString.toCharArray();
-        var mgrsCleaned = "";
-        for (var i = 0; i < mgrsChars.size(); i++) {
-            if (!mgrsChars[i].equals(' ')) {
-                mgrsCleaned = mgrsCleaned + mgrsChars[i];
+                        // Label-Elemente aktualisieren (bereits gecacht in onLayout)
+                        setTextIfExistsByRef(_mgrsZoneLabel, mgrsZone);
+                        setTextIfExistsByRef(_mgrsSquareLabel, mgrsSquare);
+                        setTextIfExistsByRef(_mgrsEastingLabel, mgrsEasting);
+                        setTextIfExistsByRef(_mgrsNorthingLabel, mgrsNorthing);
+                    }
+                }
             }
-        }
-        // Überprüfen, ob die Länge stimmt
-        if (mgrsCleaned.length() != 15) {
-            mgrsCleaned = "BAD MGRS DATA";
+        } catch (e) {
+            // ignore position errors
         }
 
-        // Einzelne Teile der MGRS-Koordinate extrahieren
-        var mgrsZone = mgrsCleaned.substring(0, 3);
-        var mgrsSquare = mgrsCleaned.substring(3, 5);
-        var mgrsEasting = mgrsCleaned.substring(5, 10);
-        var mgrsNorthing = mgrsCleaned.substring(10, 15);
+        // altitude
+        try {
+            var altitude = null;
+            var ai = Activity.getActivityInfo();
+            if (ai != null && ai.altitude != null) {
+                altitude = ai.altitude;
+            }
+            if (altitude != null) {
+                setTextIfExistsByRef(_altitudeLabel, altitude.format("%d"));
+            }
+        } catch (e) {
+            // ignore
+        }
+        setTextIfExistsByRef(_texamslLabel, "MSL");
 
-        // Label-Elemente aktualisieren>
-        var mgrsZoneLabel = View.findDrawableById("mgrsZoneLabel") as Text;
-        mgrsZoneLabel.setText(mgrsZone);
+        // always-on display small fields
+        setTextIfExistsByRef(_aominLabel, minString);
+        setTextIfExistsByRef(_texaoLabel, ":");
+        setTextIfExistsByRef(_texzaoLabel, "<------{  Don't be evil  }------>");
+        setTextIfExistsByRef(_aohourLabel, hourString);
 
-        var mgrsSquareLabel = View.findDrawableById("mgrsSquareLabel") as Text;
-        mgrsSquareLabel.setText(mgrsSquare);
+        var aodateString = nowShort != null ? Lang.format("$1$.$2$.$3$", [
+            nowShort.day.format("%02d"),
+            nowShort.month.format("%02d"),
+            nowShort.year.format("%d").substring(2,4)
+        ]) : "--.--.--";
+        setTextIfExistsByRef(_aodateLabel, aodateString);
 
-        var mgrsEastingLabel = View.findDrawableById("mgrsEastingLabel") as Text;
-        mgrsEastingLabel.setText(mgrsEasting);
-
-        var mgrsNorthingLabel = View.findDrawableById("mgrsNorthingLabel") as Text;
-        mgrsNorthingLabel.setText(mgrsNorthing);
-
-        // "Altitude"
-        var altitude = Activity.getActivityInfo().altitude;
-        var altitudeLabel = View.findDrawableById("altitudeLabel") as Text;
-        altitudeLabel.setText(altitude.format("%d"));
-
-        // "text AMSL"
-        var texamslLabel = View.findDrawableById("texamslLabel") as Text;
-        texamslLabel.setText("MSL");
-
-
-        // allways on display"--------------------------------------------------------------------------------------------------
-
-        var aominlabel = View.findDrawableById("aominLabel") as Text;
-        aominlabel.setText(minString);
-
-        var texaoLabel = View.findDrawableById("texaoLabel") as Text;
-        texaoLabel.setText(":");
-
-        var aohourlabel = View.findDrawableById("aohourLabel") as Text;
-        aohourlabel.setText(hourString);
-
-        var now = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-        var dateString = Lang.format(
-            "$1$.$2$.$3$",
-            [
-                now.day.format("%02d"),
-                now.month.format("%02d"),
-                now.year.format("%d").substring(2, 4) // Nur die letzten beiden Ziffern
-            ]
-        );
-        var aodateLabel = View.findDrawableById("aodateLabel") as Text;
-        if (aodateLabel != null) {
-            aodateLabel.setText(dateString);
-}
-
-        View.onUpdate(dc);
+        // draw triangle if visible
         drawNorthTriangle(dc);
-
     }
 
-    // Called when this View is removed from the screen. Save the
-    // state of this View here. This includes freeing resources from
-    // memory.
     function onHide() as Void {
-   }
+        // nothing
+    }
 
-    // The user has just looked at their watch. Timers and animations may be started here.
     function onExitSleep() as Void {
         _showNorthTriangle = true;
         _isSleeping = false;
-     
-        (View.findDrawableById("secLabel") as Text).setVisible(true);
-        (View.findDrawableById("texsecLabel") as Text).setVisible(true);
 
-        (View.findDrawableById("stepLabel") as Text).setVisible(true);
-        (View.findDrawableById("batteryLabel") as Text).setVisible(true);
-        (View.findDrawableById("heartRateLabel") as Text).setVisible(true);
+        // restore icons immediately based on current state
+        var phoneConnected = System.getDeviceSettings().phoneConnected;
+        var notifications = System.getDeviceSettings().notificationCount;
+        if (phoneConnected) {
+            setVisibleIfExistsByRef(_iconBtOn, true);
+            setVisibleIfExistsByRef(_iconBtOff, false);
+        } else {
+            setVisibleIfExistsByRef(_iconBtOn, false);
+            setVisibleIfExistsByRef(_iconBtOff, true);
+        }
+        if (notifications > 0) {
+            setVisibleIfExistsByRef(_iconBellOn, true);
+            setVisibleIfExistsByRef(_iconBellOff, false);
+        } else {
+            setVisibleIfExistsByRef(_iconBellOn, false);
+            setVisibleIfExistsByRef(_iconBellOff, true);
+        }
 
-        (View.findDrawableById("dayofweekLabel") as Text).setVisible(true);
-        (View.findDrawableById("dayLabel") as Text).setVisible(true);
-        (View.findDrawableById("hourLabel") as Text).setVisible(true);
-        (View.findDrawableById("minLabel") as Text).setVisible(true);
-        (View.findDrawableById("texabLabel") as Text).setVisible(true);
-        (View.findDrawableById("monthLabel") as Text).setVisible(true);
-        (View.findDrawableById("yearLabel") as Text).setVisible(true);
+        // make relevant elements visible again (safe)
+        setVisibleIfExistsByRef(_lblSec, true);
+        setVisibleIfExistsByRef(_lblStep, true);
+        setVisibleIfExistsByRef(_lblBattery, true);
+        setVisibleIfExistsByRef(_lblHeart, true);
 
-        (View.findDrawableById("utcdayofweekLabel") as Text).setVisible(true);
-        (View.findDrawableById("utcdayLabel") as Text).setVisible(true);
-        (View.findDrawableById("utchourLabel") as Text).setVisible(true);
-        (View.findDrawableById("utcminLabel") as Text).setVisible(true);
-        (View.findDrawableById("texzLabel") as Text).setVisible(true);
-        (View.findDrawableById("utcmonthLabel") as Text).setVisible(true);
-        (View.findDrawableById("utcyearLabel") as Text).setVisible(true);
+        setVisibleIfExistsByRef(_lblDayOfWeek, true);
+        setVisibleIfExistsByRef(_lblDay, true);
+        setVisibleIfExistsByRef(_lblHour, true);
+        setVisibleIfExistsByRef(_lblMin, true);
+        setVisibleIfExistsByRef(_lblTexAB, true);
+        setVisibleIfExistsByRef(_lblMonth, true);
+        setVisibleIfExistsByRef(_lblYear, true);
 
-        (View.findDrawableById("mgrsZoneLabel") as Text).setVisible(true);
-        (View.findDrawableById("mgrsSquareLabel") as Text).setVisible(true);
-        (View.findDrawableById("mgrsEastingLabel") as Text).setVisible(true);
-        (View.findDrawableById("mgrsNorthingLabel") as Text).setVisible(true);
+        setVisibleIfExistsByRef(_lblUtcDayOfWeek, true);
+        setVisibleIfExistsByRef(_lblUtcDay, true);
+        setVisibleIfExistsByRef(_lblUtcHour, true);
+        setVisibleIfExistsByRef(_lblUtcMin, true);
+        setVisibleIfExistsByRef(_lblTexZ, true);
+        setVisibleIfExistsByRef(_lblUtcMonth, true);
+        setVisibleIfExistsByRef(_lblUtcYear, true);
 
-        (View.findDrawableById("altitudeLabel") as Text).setVisible(true);
-        (View.findDrawableById("texamslLabel") as Text).setVisible(true);
+        setVisibleIfExistsByRef(_mgrsZoneLabel, true);
+        setVisibleIfExistsByRef(_mgrsSquareLabel, true);
+        setVisibleIfExistsByRef(_mgrsEastingLabel, true);
+        setVisibleIfExistsByRef(_mgrsNorthingLabel, true);
 
-        (View.findDrawableById("hdngLabel") as Text).setVisible(true);
-        (View.findDrawableById("texangleLabel") as Text).setVisible(true);
-        (View.findDrawableById("tac_lines") as Bitmap).setVisible(true);
+        setVisibleIfExistsByRef(_altitudeLabel, true);
+        setVisibleIfExistsByRef(_texamslLabel, true);
 
-        (View.findDrawableById("aohourLabel") as Text).setVisible(false);
-        (View.findDrawableById("texaoLabel") as Text).setVisible(false);
-        (View.findDrawableById("aominLabel") as Text).setVisible(false);
-        (View.findDrawableById("aodateLabel") as Text).setVisible(false);
+        setVisibleIfExistsByRef(_hdngLabel, true);
+        setVisibleIfExistsByRef(_texangleLabel, true);
+        setVisibleIfExistsByRef(_tacLines, true);
+
+        setVisibleIfExistsByRef(_aohourLabel, false);
+        setVisibleIfExistsByRef(_texaoLabel, false);
+        setVisibleIfExistsByRef(_texzaoLabel, false);
+        setVisibleIfExistsByRef(_aominLabel, false);
+        setVisibleIfExistsByRef(_aodateLabel, false);
     }
 
-    // Terminate any active timers and prepare for slow updates.
     function onEnterSleep() as Void {
         _showNorthTriangle = false;
         _isSleeping = true;
 
-        (View.findDrawableById("secLabel") as Text).setVisible(false);
-        (View.findDrawableById("texsecLabel") as Text).setVisible(false);
+        // hide icons immediately so they don't flash during transition
+        setVisibleIfExistsByRef(_iconBellOn, false);
+        setVisibleIfExistsByRef(_iconBellOff, false);
+        setVisibleIfExistsByRef(_iconBtOn, false);
+        setVisibleIfExistsByRef(_iconBtOff, false);
 
-        (View.findDrawableById("stepLabel") as Text).setVisible(false);
-        (View.findDrawableById("batteryLabel") as Text).setVisible(false);
-        (View.findDrawableById("heartRateLabel") as Text).setVisible(false);
+        setVisibleIfExistsByRef(_lblSec, false);
+        setVisibleIfExistsByRef(_lblStep, false);
+        setVisibleIfExistsByRef(_lblBattery, false);
+        setVisibleIfExistsByRef(_lblHeart, false);
 
-        (View.findDrawableById("dayofweekLabel") as Text).setVisible(false);
-        (View.findDrawableById("dayLabel") as Text).setVisible(false);
-        (View.findDrawableById("hourLabel") as Text).setVisible(false);
-        (View.findDrawableById("minLabel") as Text).setVisible(false);
-        (View.findDrawableById("texabLabel") as Text).setVisible(false);
-        (View.findDrawableById("monthLabel") as Text).setVisible(false);
-        (View.findDrawableById("yearLabel") as Text).setVisible(false);
+        setVisibleIfExistsByRef(_lblDayOfWeek, false);
+        setVisibleIfExistsByRef(_lblDay, false);
+        setVisibleIfExistsByRef(_lblHour, false);
+        setVisibleIfExistsByRef(_lblMin, false);
+        setVisibleIfExistsByRef(_lblTexAB, false);
+        setVisibleIfExistsByRef(_lblMonth, false);
+        setVisibleIfExistsByRef(_lblYear, false);
 
-        (View.findDrawableById("utcdayofweekLabel") as Text).setVisible(false);
-        (View.findDrawableById("utcdayLabel") as Text).setVisible(false);
-        (View.findDrawableById("utchourLabel") as Text).setVisible(false);
-        (View.findDrawableById("utcminLabel") as Text).setVisible(false);
-        (View.findDrawableById("texzLabel") as Text).setVisible(false);
-        (View.findDrawableById("utcmonthLabel") as Text).setVisible(false);
-        (View.findDrawableById("utcyearLabel") as Text).setVisible(false);
+        setVisibleIfExistsByRef(_lblUtcDayOfWeek, false);
+        setVisibleIfExistsByRef(_lblUtcDay, false);
+        setVisibleIfExistsByRef(_lblUtcHour, false);
+        setVisibleIfExistsByRef(_lblUtcMin, false);
+        setVisibleIfExistsByRef(_lblTexZ, false);
+        setVisibleIfExistsByRef(_lblUtcMonth, false);
+        setVisibleIfExistsByRef(_lblUtcYear, false);
 
-        (View.findDrawableById("mgrsZoneLabel") as Text).setVisible(false);
-        (View.findDrawableById("mgrsSquareLabel") as Text).setVisible(false);
-        (View.findDrawableById("mgrsEastingLabel") as Text).setVisible(false);
-        (View.findDrawableById("mgrsNorthingLabel") as Text).setVisible(false);
+        setVisibleIfExistsByRef(_mgrsZoneLabel, false);
+        setVisibleIfExistsByRef(_mgrsSquareLabel, false);
+        setVisibleIfExistsByRef(_mgrsEastingLabel, false);
+        setVisibleIfExistsByRef(_mgrsNorthingLabel, false);
 
-        (View.findDrawableById("altitudeLabel") as Text).setVisible(false);
-        (View.findDrawableById("texamslLabel") as Text).setVisible(false);
+        setVisibleIfExistsByRef(_altitudeLabel, false);
+        setVisibleIfExistsByRef(_texamslLabel, false);
 
-        (View.findDrawableById("hdngLabel") as Text).setVisible(false);
-        (View.findDrawableById("texangleLabel") as Text).setVisible(false);
-        (View.findDrawableById("tac_lines") as Bitmap).setVisible(false);
+        setVisibleIfExistsByRef(_hdngLabel, false);
+        setVisibleIfExistsByRef(_texangleLabel, false);
+        setVisibleIfExistsByRef(_tacLines, false);
 
-        (View.findDrawableById("aohourLabel") as Text).setVisible(true);
-        (View.findDrawableById("texaoLabel") as Text).setVisible(true);        
-        (View.findDrawableById("aominLabel") as Text).setVisible(true);
-        (View.findDrawableById("aodateLabel") as Text).setVisible(true);
-        
-
+        setVisibleIfExistsByRef(_aohourLabel, true);
+        setVisibleIfExistsByRef(_texaoLabel, true);
+        setVisibleIfExistsByRef(_texzaoLabel, true);
+        setVisibleIfExistsByRef(_aominLabel, true);
+        setVisibleIfExistsByRef(_aodateLabel, true);
     }
-
 }
